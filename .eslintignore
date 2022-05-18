@@ -1,0 +1,5 @@
+_dev/*.js
+_mlc/module/shared/js/*
+_dev/node_modules
+_dev/__test__/**/*.js
+docs/**/*.js.map

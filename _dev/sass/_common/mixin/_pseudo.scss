@@ -1,0 +1,13 @@
+@mixin pseudo {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+@mixin hover {
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}

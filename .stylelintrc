@@ -1,0 +1,37 @@
+{
+    "extends": "./node_modules/stylelint-config-standard",
+    "plugins": [
+        "./node_modules/stylelint-scss",
+        "./node_modules/stylelint-prettier"
+    ],
+    "ignoreFiles": [
+        "./src/scss/**/_normalize.scss",
+        "./src/scss/**/_sprite-mixin.scss",
+        "./src/scss/**/_sprite-generate.scss",
+        "./src/scss/**/_svg-sprite-mixin.scss",
+        "./src/scss/**/_svg-sprite.scss"
+    ],
+    "rules": {
+        "at-rule-no-unknown": null,
+        "scss/at-rule-no-unknown": true,
+        "declaration-empty-line-before": null,
+        "indentation": 4,
+        "string-quotes": "double",
+        "color-hex-case": "lower",
+        "color-hex-length": "short",
+        "color-no-invalid-hex": true,
+        "number-leading-zero": "never",
+        "number-max-precision": 5,
+        "number-no-trailing-zeros": true,
+        "selector-combinator-space-after": "always",
+        "at-rule-empty-line-before": ["always", {
+            "except": ["after-same-name", "blockless-after-same-name-blockless"],
+            "ignore": ["after-comment", "first-nested", "blockless-after-same-name-blockless"],
+            "ignoreAtRules": ["else", "mixin", "function", "include"]
+        }],
+        "no-descending-specificity": null,
+        "block-closing-brace-newline-after": ["always", {
+            "ignoreAtRules": ["if", "else"]
+        }]
+    }
+}

@@ -1,0 +1,175 @@
+@use '../_common/' as *;
+
+.nav-list-contents {
+  .header-icon-arrow-a {
+    transition: .3s;
+    transform: translateY(1px);
+  }
+
+  @include rwd(bpTab) {
+    &._no-icon {
+    .header-icon-arrow-a {
+        display: none;
+      }
+    }
+  }
+
+  @include rwd(bpTab, below) {
+    &._no-icon {
+      .header-icon-arrow-a {
+          position: absolute;
+          top: 50%;
+          right: 12px;
+          transform: rotate(-90deg) translateX(2px);
+        }
+      }
+
+    &:not(._no-icon) {
+      .header-icon-arrow-a {
+        display: none;
+      }
+    }
+  }
+}
+
+.icon-mypage-a {
+  width: 13px;
+  height: 18px;
+  z-index: 10;
+
+  @include rwd(bpTab, below) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.icon-entry-a {
+  width: 16px;
+  height: 18px;
+  z-index: 10;
+
+  @include rwd(bpTab, below) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.icon-feature-a {
+  width: 44.32px;
+  height: 63.94px;
+}
+
+.icon-feature-b {
+  width: 64px;
+  height: 57px;
+}
+
+.icon-window-a {
+  display: inline-block;
+  width: 10px;
+  height: 8px;
+  margin-left: 4px;
+}
+
+.icon-window-b {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-career-a {
+  @include rwd(bpSp) {
+    width: 46px;
+    height: 39px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 32px;
+    height: 28px;
+  }
+}
+
+.icon-person-a {
+  @include rwd(bpSp) {
+    width: 70px;
+    height: 60px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 56px;
+    height: 48px;
+  }
+}
+
+.icon-person-b {
+  @include rwd(bpSp) {
+    width: 58px;
+    height: 70px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 47px;
+    height: 56px;
+  }
+}
+
+.icon-person-c {
+  @include rwd(bpSp) {
+    width: 70px;
+    height: 65px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 56px;
+    height: 53px;
+  }
+}
+
+.txt-person-a {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  @include rwd(bpSp) {
+    width: 240px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 120px;
+  }
+}
+
+.txt-special-a {
+  @include rwd(bpSp, above) {
+    width: 240px;
+  }
+
+  @include rwd(bpSp, below) {
+    width: 180px;
+  }
+}
+
+.txt-lead-b {
+  img {
+    margin: 0 auto;
+  }
+
+  @include rwd(bpSp, above) {
+    padding: 120px 20px;
+
+    img {
+      max-width: 700px;
+    }
+  }
+
+  @include rwd(bpSp, below) {
+    padding: 56px 20px;
+
+    img {
+      max-width: 340px;
+    }
+  }
+}

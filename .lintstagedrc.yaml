@@ -1,0 +1,4 @@
+'*.+(htm|html|shtml)':
+    - vlint
+'*.css':
+    - vlint --css

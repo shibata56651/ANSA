@@ -1,0 +1,746 @@
+@charset "UTF-8";
+
+/*
+ * mml.css - MLC Module List
+ * @version 1.13.1.34
+ * @copyright (C) Mitsue-Links Co., Ltd. https://www.mitsue.co.jp/
+ */
+
+
+@import url("mml-markdown.css");
+
+/* ----------------------------------------------------------------------------
+ * ダミー要素
+ * ------------------------------------------------------------------------- */
+dummy-element {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid tomato;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE MAIN COLOR STYLE
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_SECTION button.MLC_MODULE_CODECOPY {
+  color: #fff;
+  background: #216aae;
+}
+.MLC_MODULE_SECTION button.MLC_MODULE_CODECOPY:hover ,
+.MLC_MODULE_SECTION button.MLC_MODULE_CODECOPY:focus {
+  background: #1e609c;
+}
+#MLC_MODULE_CONTROLLER button.MLC_MODULE_CONTROL_BTN[data-id="ALL"] ,
+#MLC_MODULE_CONTROLLER button.MLC_MODULE_CONTROL_BTN[data-id="ALL"]:hover ,
+#MLC_MODULE_CONTROLLER button.MLC_MODULE_CONTROL_BTN[data-id="ALL"]:focus {
+  color: #fff;
+  background: #216aae;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE COMMON STYLE
+ * ------------------------------------------------------------------------- */
+[id^="MLC_MODULE"] ,
+[id^="MLC_MODULE"] * ,
+[id^="MLC_MODULE"]::before ,
+[id^="MLC_MODULE"]::after ,
+[class^="MLC_MODULE"] {
+  font-family: inherit;
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+}
+[class^="MLC_MODULE"]:not(.MLC_MODULE_SAMPLE):not(.MLC_MODULE_SECTION) {
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+[id^="MLC_MODULE"][hidden] ,
+[class^="MLC_MODULE"][hidden] {
+  display: none !important;
+}
+
+button[id^="MLC_MODULE"] ,
+button[class^="MLC_MODULE"] {
+  color: #333;
+  background: linear-gradient(-180deg, #fefefe 0%, #eee 90%);
+  padding: 10px 10px;
+  cursor: default;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  -webkit-appearance: none;
+     -moz-appearance: none;
+      -ms-appearance: none;
+}
+
+button[id^="MLC_MODULE"]:focus ,
+button[id^="MLC_MODULE"]:hover ,
+button[class^="MLC_MODULE"]:focus ,
+button[class^="MLC_MODULE"]:hover {
+  background: #eaeaea;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MAX-WIDTH ADJUST
+ * ------------------------------------------------------------------------- */
+#MLC_MODULE_TOC ,
+.MLC_MODULE_CODE ,
+.MLC_MODULE_TITLE ,
+.MLC_MODULE_COMMENT ,
+.MLC_MODULE_COMMENT_EXPAND ,
+.MLC_MODULE_CODECOPY {
+  margin: 0 auto;
+}
+/* content width */
+#MLC_MODULE_TOC ,
+.MLC_MODULE_CODE ,
+.MLC_MODULE_CODECOPY ,
+.MLC_MODULE_TITLE ,
+.MLC_MODULE_COMMENT ,
+.MLC_MODULE_COMMENT_EXPAND {
+  /*max-width: 980px;*/
+}
+/* (content width) - MLC_MODULE_COMMENT padding, border ((10 + 1) * 2) */
+.MLC_MODULE_COMMENT {
+  /*max-width: 958px;*/
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MARGIN ADJUST
+ * ------------------------------------------------------------------------- */
+#MLC_MODULE_TOC {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.MLC_MODULE_CODE {
+  margin-top: 20px;
+  margin-bottom: 120px;
+}
+.MLC_MODULE_TITLE {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.MLC_MODULE_COMMENT {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.MLC_MODULE_COMMENT_EXPAND {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.MLC_MODULE_CODECOPY {
+  margin-top: -120px;
+  margin-bottom: 80px;
+}
+.MLC_MODULE_TITLE[hidden] + .MLC_MODULE_COMMENT {
+  margin-top: 0;
+}
+.MLC_MODULE_CODECOPY:not([hidden]) + .MLC_MODULE_SAMPLE {
+  margin-top: -60px;
+}
+.MLC_MODULE_CODE[hidden] + .MLC_MODULE_CODECOPY {
+  margin-top: 20px;
+  border-radius: 4px;
+}
+.MLC_MODULE_CODECOPY[hidden] + .MLC_MODULE_SAMPLE {
+  margin-top: -100px;
+}
+.MLC_MODULE_CODE[hidden] + .MLC_MODULE_CODECOPY[hidden] + .MLC_MODULE_SAMPLE {
+  margin-top: 0;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_PAGE_INTRODUCTION
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_PAGE_INTRODUCTION {
+  font: inherit;
+  white-space: pre-line;
+  color: inherit;
+  margin: 0 0 40px;
+  opacity: .2;
+}
+html[data-mml-setup="done"] .MLC_MODULE_PAGE_INTRODUCTION {
+  white-space: normal;
+  opacity: 1;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_TOC
+ * ------------------------------------------------------------------------- */
+#MLC_MODULE_TOC {
+  font-size: 12px;
+  line-height: 2;
+  display: block;
+  min-width: 245px;
+}
+
+#MLC_MODULE_TOC h2 {
+  font-size: 14px;
+  font-weight: normal;
+  background: #f6f6f6;
+  box-sizing: border-box;
+  margin: 0 0 0 auto;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-width: 1px 1px 0;
+  border-radius: 4px 4px 0 0;
+}
+
+#MLC_MODULE_TOC ul {
+  background: #fff;
+  overflow: auto;
+  box-sizing: border-box;
+  max-height: 50vh;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 1px solid #ccc;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+#MLC_MODULE_TOC li {
+  margin: 0;
+  padding: 12px 10px 8px;
+}
+
+#MLC_MODULE_TOC li:not(:first-child) {
+  border: solid #ccc;
+  border-width: 1px 0 0;
+}
+#MLC_MODULE_TOC li:hover {
+  background: #efefef;
+}
+#MLC_MODULE_TOC li a {
+  text-decoration: none;
+  color: #1e609c;
+}
+#MLC_MODULE_TOC li a[aria-current] {
+  font-weight: bold;
+}
+#MLC_MODULE_TOC li a:hover ,
+#MLC_MODULE_TOC li a:focus {
+  text-decoration: underline;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_SECTION
+ * ------------------------------------------------------------------------- */
+html[data-mml-control-toggle-btn-is-all-pressed="false"] .MLC_MODULE_SECTION + .MLC_MODULE_SECTION {
+  margin-top: 80px;
+  padding-top: 80px;
+  border-top: 1px dashed #bbb;
+}
+
+.MLC_MODULE_SECTION.IS_OBSOLETE .MLC_MODULE_SAMPLE {
+  transition: .2s opacity ease-out;
+  opacity: .3;
+}
+.MLC_MODULE_SECTION.IS_OBSOLETE:hover .MLC_MODULE_SAMPLE {
+  opacity: 1;
+}
+
+.MLC_MODULE_SECTION.IS_OBSOLETE .MLC_MODULE_TITLE > h2 > .OBSOLETE_LABEL {
+  font-size: 17px;
+  color: #fff;
+  background: #d73336;
+  display: inline-block;
+  margin: 0 9px 1px 0;
+  padding: 2px 5px 0;
+  border-radius: 4px;
+}
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_TITLE
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_TITLE {
+  font-size: 14px;
+  color: #333;
+  background: #f6f6f6;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+}
+.MLC_MODULE_TITLE > * {
+  margin: 0;
+  padding: 7px 10px;
+}
+.MLC_MODULE_TITLE > h2 {
+  font-size: 19px;
+  line-height: 1.6;
+  padding-left: 45px;
+}
+.MLC_MODULE_TITLE > span:last-child {
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 7px 10px;
+}
+.MLC_MODULE_TITLE > span:last-child::before {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  height: 100%;
+  content: "";
+  border-left: 1px dashed #ddd;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_URLCOPY
+ * ------------------------------------------------------------------------- */
+button.MLC_MODULE_URLCOPY {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  width: 44px;
+  height: 44px;
+  border: 0;
+}
+button.MLC_MODULE_URLCOPY::before ,
+button.MLC_MODULE_URLCOPY::after {
+  position: absolute;
+  box-sizing: content-box;
+  width: 6px;
+  height: 18px;
+  content: "";
+  transform: rotate(45deg);
+  border: 2px solid #333;
+  border-radius: 60px;
+}
+button.MLC_MODULE_URLCOPY::before {
+  top: 15px;
+  left: 16px;
+}
+button.MLC_MODULE_URLCOPY::after {
+  top: 7px;
+  left: 18px;
+}
+button.MLC_MODULE_URLCOPY span {
+  display: block;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_COMMENT
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_COMMENT {
+  font-size: 13px;
+  white-space: pre-wrap;
+  color: #333;
+  background: #fefefe;
+  position: relative;
+  z-index: 0;
+  top: -1px;
+  overflow: auto;
+  box-sizing: content-box !important;
+  max-height: 300px;
+  padding: 12px 10px 12px;
+  transition: .2s max-height ease-out;
+  border: 1px solid #ccc;
+}
+.MLC_MODULE_COMMENT * {
+  margin: 0;
+  padding: 0;
+}
+.MLC_MODULE_COMMENT.MLC_MODULE_MARKDOWN_IS_PARSED {
+  white-space: normal;
+  min-height: 21px;
+  max-height: 16vh;
+}
+.MLC_MODULE_COMMENT.is-expanded {
+  max-height: calc(100vh - 200px);
+}
+.MLC_MODULE_TITLE[hidden] + .MLC_MODULE_COMMENT {
+  border-radius: 4px;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_COMMENT_EXPAND
+ * ------------------------------------------------------------------------- */
+button.MLC_MODULE_COMMENT_EXPAND {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+}
+button.MLC_MODULE_COMMENT_EXPAND::after {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  box-sizing: content-box;
+  width: 4px;
+  height: 4px;
+  margin: 0 0 0 5px;
+  content: "";
+  transform: rotate(45deg);
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+}
+button.MLC_MODULE_COMMENT_EXPAND[aria-pressed="true"]::after {
+  top: 0;
+  transform: rotate(-135deg);
+}
+.MLC_MODULE_COMMENT[hidden] + button.MLC_MODULE_COMMENT_EXPAND {
+  display: none;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_SAMPLE
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_SAMPLE {
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_CODE
+ * ------------------------------------------------------------------------- */
+.MLC_MODULE_CODE {
+  font-family: Consolas, "Andale Mono", Monaco, monospace;
+  font-size: 12px;
+  line-height: 16px;
+  color: #0c0;
+  background: linear-gradient(to bottom, #191919 50%, #000 50%);
+  background-size: 40px 32px;
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  max-height: 300px;
+  padding: 16px 0 16px 10px;
+  resize: vertical;
+  border: 0;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_CODECOPY
+ * ------------------------------------------------------------------------- */
+button.MLC_MODULE_CODECOPY {
+  color: #fff;
+  display: block;
+  width: 100%;
+  transition: .2s background ease-out;
+  border: 0;
+  border-radius: 0 0 4px 4px;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_CONTROLLER
+ * ------------------------------------------------------------------------- */
+/* ------------------------------------
+ * MAIN
+ * --------------------------------- */
+#MLC_MODULE_CONTROLLER {
+  text-align: left;
+  background: #efefef;
+  position: fixed;
+  z-index: 20000;
+  top: auto !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  backface-visibility: hidden;
+  width: 200px;
+  cursor: move;
+  transition: .2s opacity ease-out;
+  border: 1px solid #ccc;
+  contain: layout;
+  opacity: .9;
+}
+#MLC_MODULE_CONTROLLER:hover {
+  opacity: 1;
+}
+#MLC_MODULE_CONTROLLER.is-moving {
+  opacity: .5;
+}
+
+
+
+/* ------------------------------------
+ * summary and details
+ * --------------------------------- */
+#MLC_MODULE_CONTROLLER summary {
+  font-family: sans-serif;
+  font-size: 11px;
+  line-height: 1.6;
+  background: #e0e0e0;
+  display: block;
+  width: 100%;
+  padding: 15px 10px 10px 22px;
+  cursor: default;
+  user-select: none;
+}
+#MLC_MODULE_CONTROLLER details summary::before {
+  position: absolute;
+  top: 21px;
+  left: 8px;
+  display: block;
+  width: 0;
+  height: 0;
+  content: "";
+  border: 4px solid transparent;
+  border-top-color: #333;
+}
+#MLC_MODULE_CONTROLLER summary span {
+  pointer-events: none;
+}
+#MLC_MODULE_CONTROLLER details[open] {
+  display: block;
+}
+#MLC_MODULE_CONTROLLER details[open] summary::before {
+  top: 17px;
+  transform: rotate(180deg);
+}
+#MLC_MODULE_CONTROLLER details:not([open])::after {
+  display: none;
+}
+#MLC_MODULE_CONTROLLER summary::-webkit-details-marker {
+  display: none;
+}
+#MLC_MODULE_CONTROLLER details:not([open]) summary {
+  margin-bottom: 0;
+}
+#MLC_MODULE_CONTROLLER details:not([open]) .MLC_MODULE_CONTROL_BTN_WRAPPER {
+  display: none;
+}
+
+
+
+/* ------------------------------------
+ * btns
+ * --------------------------------- */
+#MLC_MODULE_CONTROLLER .MLC_MODULE_CONTROL_BTN_WRAPPER {
+  background: #efefef;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  overflow: auto;
+  width: calc(100% + 2px);
+  max-height: calc(100vh - 62px);
+  padding: 21px 14px 0;
+  border: 1px solid #ccc;
+}
+#MLC_MODULE_CONTROLLER .MLC_MODULE_CONTROL_BTN_WRAPPER::before {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAFCAYAAADCMiU1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAClJREFUeNpiqKio+A8EDCBMLPv9+/cMIEwum5D5TAyDEIw6akg7CiDAAIXcZOxKtzZOAAAAAElFTkSuQmCC");
+  position: absolute;
+  z-index: 0;
+  top: 8px;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 37px;
+  height: 5px;
+  margin: 0 auto;
+  content: "";
+}
+
+
+
+/* ------------------------------------
+ * static mode
+ * --------------------------------- */
+html[data-mml-control-is-static="true"] #MLC_MODULE_CONTROLLER {
+  position: relative;
+  margin: 20px 0 50px auto;
+  transform: none!important;
+  opacity: 1;
+}
+html[data-mml-control-is-static="true"] #MLC_MODULE_CONTROLLER .MLC_MODULE_CONTROL_BTN_WRAPPER {
+  position: relative;
+  border-bottom: 0;
+}
+html[data-mml-control-is-static="true"] .MLC_MODULE_CONTROL_BTN_WRAPPER::before {
+  display: none;
+}
+
+
+
+/* ------------------------------------
+ * static toggle button
+ * --------------------------------- */
+#MLC_MODULE_CONTROLLER_FIXED_TOGGLE {
+  background: transparent;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 0;
+}
+#MLC_MODULE_CONTROLLER_FIXED_TOGGLE::before {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA1klEQVQ4jdXTvUqCURwG8N+rThItNnUR4dTgLQTR0pY4BEFjN9Lo1g2oW0tDRBB0AU5uIQQ2JYIQgnVajnB8eQNfdOkPZ3k4z9f5yEIItpnKVuxdCIgVbvGFj9ya4yRHuUEX9RCCWgQPMUQHe7mEY2QIuI5m8ITBSqCKT4wKQh5H4nt0hisM0gp9PPzRshndf/CNy7R+mUPM8Iy7FKwVbl2fGe6jewUtvJYReMNpDmtjgV5aocyTvMB5mmCJAxxZv8aimaOBaSowwRkeN0ywjxfI/v9n+gVS0DjrLd96HQAAAABJRU5ErkJggg==") center center no-repeat;
+  background-size: 16px 16px;
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  right: 4px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  content: "";
+  opacity: .25;
+}
+#MLC_MODULE_CONTROLLER_FIXED_TOGGLE[aria-pressed="true"]::before {
+  opacity: .8;
+}
+#MLC_MODULE_CONTROLLER_FIXED_TOGGLE span {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_CONTROL_BTN
+ * ------------------------------------------------------------------------- */
+button.MLC_MODULE_CONTROL_BTN {
+  font-size: 11px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 0 0 5px;
+  cursor: default;
+  border-color: #aaa;
+}
+button.MLC_MODULE_CONTROL_BTN[aria-pressed="true"] {
+  font-weight: bold;
+}
+button.MLC_MODULE_CONTROL_BTN:hover {
+  outline: 0;
+}
+button.MLC_MODULE_CONTROL_BTN:last-child {
+  margin-bottom: 14px;
+}
+button.MLC_MODULE_CONTROL_BTN[data-id="ALL"] {
+  border-color: #aaa;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_DIALOG
+ * ------------------------------------------------------------------------- */
+#MLC_MODULE_DIALOG {
+  pointer-events: none;
+  background: transparent;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transition: .2s opacity ease-out;
+  border: 0;
+  opacity: 0;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * MLC_MODULE_DIALOG_MESSAGE
+ * ------------------------------------------------------------------------- */
+#MLC_MODULE_DIALOG_MESSAGE {
+  color: #fff;
+  background: #333;
+  padding: 10px;
+  border: 1px solid #000;
+  box-shadow: 0 0 3px 0 #000;
+}
+#MLC_MODULE_DIALOG[open] {
+  opacity: 1;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+ * Media query
+ * ------------------------------------------------------------------------- */
+@media screen and (min-width: 510px) {
+  html[data-mml-control-is-static="true"] #MLC_MODULE_TOC {
+    float: left;
+  }
+  html[data-mml-control-is-static="true"] #MLC_MODULE_CONTROLLER {
+    float: right;
+  }
+  html[data-mml-control-is-static="true"] #MLC_MODULE_CONTROLLER + * {
+    clear: both;
+  }
+
+  #MLC_MODULE_CONTROLLER_FIXED_TOGGLE:focus ,
+  #MLC_MODULE_CONTROLLER_FIXED_TOGGLE:hover {
+    background: #d0d0d0;
+    opacity: 1;
+  }
+}
+@media screen and (min-width: 768px) {
+  #MLC_MODULE_TOC {
+    min-width: 310px;
+  }
+  #MLC_MODULE_TOC h2 ,
+  #MLC_MODULE_TOC ul {
+    width: 250px;
+    margin-left: 0;
+  }
+  #MLC_MODULE_TOC ul {
+    max-height: 30vh;
+  }
+  #MLC_MODULE_TOC li {
+    font-size: 11px;
+    padding: 5px 10px 3px;
+  }
+}
+@media print {
+  #MLC_MODULE_CONTROLLER {
+    display: none;
+  }
+}

@@ -1,0 +1,18 @@
+@use '../../_common/' as *;
+
+#js-youtube-root {
+  >ul {
+    >li {
+      .items {
+        &__img {
+          >a {
+            >img {
+              display: inline-block;
+            }
+          }
+        }
+        &__text {}
+      }
+    }
+  }
+}

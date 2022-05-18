@@ -1,0 +1,15 @@
+html:
+  vnu: https://av.mitsue.com
+  charset: utf-8
+  include: '**/*.html'
+  ignore:
+    - '**/node_modules/**'
+    - 'docs/_mlc/module/shared/inc/**'
+    - 'docs/**/inc/**'
+css:
+  vnu: https://av.mitsue.com
+  charset: utf-8
+  include: 'docs/company/recruit/graduates/common/css/main.css'
+  ignore:
+    - '**/node_modules/**'
+    - 'docs/_mlc/module/shared/**'

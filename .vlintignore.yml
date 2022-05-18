@@ -1,0 +1,6 @@
+html:
+    docs/**/*.html:
+        - Overriding document character encoding from none to “utf\-8”\.
+css:
+    docs/company/recruit/graduates/common/css/main.css:
+        - Overriding document character encoding from “UTF\x2d8” to “utf\x2d8”\.

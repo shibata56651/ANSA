@@ -1,0 +1,29 @@
+@use '../_common/'as *;
+
+.str-contents-wrapper {
+  &__inner {}
+}
+
+.mv {
+  width: 100%;
+  height: 100vh;
+
+  &__content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__animation-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+
+    &--text {
+      color: $background-color-01;
+      font-family: 'Noto Serif JP', serif;
+      font-size: .8rem;
+    }
+  }
+}

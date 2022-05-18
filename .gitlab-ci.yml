@@ -1,0 +1,12 @@
+image: mlc-deploy-minimum
+lint:
+  script:
+    # https://packages.ubuntu.com/source/bionic/gifsicle
+    - apt-get -qq update && apt-get -qq install -y --no-install-recommends autoconf automake gcc libc6-dev python3 g++
+    - n 16.13.0
+    - npm ci
+    # 証明書エラーがでたらNODE_TLS_REJECT_UNAUTHORIZED=0を設定
+    # - NODE_TLS_REJECT_UNAUTHORIZED=0 npm run lint:html
+    # - NODE_TLS_REJECT_UNAUTHORIZED=0 npm run lint
+  only:
+    - demo

@@ -1,0 +1,109 @@
+<%
+/*
+page.type: ガワの種類
+  00: トップページテンプレート
+  01: カテゴリ一覧テンプレート
+  02: ノーマルテンプレート
+  03: ワイドテンプレート
+*/
+
+const root = './'; // ejsフォルダまでの階層に合わせて変更する
+
+const page = {
+  type: 01, // ガワの種類参照
+  sideNavi: false, // サイドナビがある場合、true にする
+  category: 01, // 第二階層（サイドナビに反映）参照
+  title: 'dummyTitle',
+  description: 'xxxxxxx',
+  url: '/', // ルート相対パスで指定する
+  ogp: true, // ogpを入れる場合、true にする
+  ogImg: '/common/images/ogp/ogp-01.png', // opgを反映する場合、相対パスで画像を指定する
+  breadcrumbItem: {
+    two: { // 第2階層
+      name: '特集',
+      path: '/dummy/'
+    },
+    three: { // 第3階
+      name: '第3階層',
+      path: '/dummy/dummy/'
+    },
+    four: { // 第4階層
+      name: '第4階層',
+      path: '/dummy/dummy/dummy/'
+    },
+    five: { // 第5階層
+      name: '第5階層',
+      path: '/dummy/dummy/dummy/dummy/'
+    },
+    current: { // 現在地
+      name: 'カテゴリ'
+    }
+  },
+};
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= page.title %></title>
+<meta name="description" content="<%= page.description %>">
+<%- include('./inc/head') %>
+<script src="https://smtpjs.com/v2/smtp.js"></script>
+<link rel="stylesheet" href="/company/recruit/graduates/common/css/swiper-bundle.css">
+</head>
+
+<body>
+  <%- include('./inc/header') %>
+
+<main class="str-contents-wrapper">
+<div class="str-contents-wrapper__inner">
+<div class="mv">
+<div class="mv__content">
+<!-- <div class="mv__animation-wrap">
+  <p class="mv__animation-wrap--text mv__animation-01"><span class="view-item">この</span><span class="view-item">ページは</span><span class="view-item">ポートフォリオサイト</span><span class="view-item">です。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-02"><span class="view-item">24歳の男。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-03"><span class="view-item"><b>JavaScript</b>が</span><span class="view-item">できます！</span></p>
+  <p class="mv__animation-wrap--text mv__animation-04"><span class="view-item">タピオカは</span><span class="view-item"><b>邪道</b>だと思います。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-05"><span class="view-item">実は</span><span class="view-item">ポテト</span><span class="view-item">って</span><span class="view-item">神の産物</span><span class="view-item">なんですよね。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-06"><span class="view-item">アジアンライス</span><span class="view-item">をたまに食べると</span><span class="view-item">そのありがたみを知れる。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-07"><span class="view-item">丼ものなら</span><span class="view-item">毎日食べても</span><span class="view-item">飽きない！！</span></p>
+  <p class="mv__animation-wrap--text mv__animation-08"><span class="view-item">トマト</span><span class="view-item">は行ける</span><span class="view-item">んですけどね...</span><span class="view-item">ナスは</span><span class="view-item">駄目</span><span class="view-item">なんですよ。</span><span class="view-item">ナス</span><span class="view-item">だけは。。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-09"><span class="view-item">芋なのに</span><span class="view-item">甘いって。。</span><span class="view-item">甘すぎる。</span><span class="view-item">私にとっては</span></p>
+  <p class="mv__animation-wrap--text mv__animation-10"><span class="view-item">得意な</span><span class="view-item">プログラミング</span><span class="view-item">言語？？</span><span class="view-item">フッ...</span><span class="view-item">ないよ。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-11"><span class="view-item">PHP？</span><span class="view-item">雰囲気でならかけますよ？</span></p>
+  <p class="mv__animation-wrap--text mv__animation-12"><span class="view-item">JavaScript</span><span class="view-item">ですか。</span><span class="view-item">彼とは</span><span class="view-item">いささか</span><span class="view-item">因縁</span><span class="view-item">がありましてね。</span><span class="view-item">予想工程の</span><span class="view-item">倍</span><span class="view-item">頂ければ</span><span class="view-item">対応</span><span class="view-item">可能</span><span class="view-item">です。</span></p>
+  <p class="mv__animation-wrap--text mv__animation-13"><span class="view-item">環境は</span><span class="view-item">Webpack</span><span class="view-item">使ってますよ。</span><span class="view-item">かっこいい</span><span class="view-item">じゃない</span><span class="view-item">ですか。</span></p>
+</div>/.mv__animation-wrap -->
+</div><!-- /.mv__content -->
+</div><!-- /.mv -->
+
+<form name="questionForm" class="js-mail-root" method="post" enctype="text/plain">
+<div class="form-item">
+<p><label for="name">お名前</label></p>
+<input name="questionFormName" type="text" id="name">
+</div><!-- /.form-item -->
+
+<div class="form-item">
+<p><label for="address">メールアドレス</label></p>
+<input name="questionFormEmail" type="email" id="address">
+</div><!-- /.form-item -->
+
+<div class="form-item">
+<p><label for="contact">問い合わせ内容</label></p>
+<textarea name="questionFormContact" id="contact" cols="30" rows="10"></textarea>
+</div><!-- /.form-item -->
+
+<button id="js-mail-btn">送信</button>
+</form>
+
+<div id="live"></div>
+
+<div id="js-youtube-root"></div>
+
+</div><!-- /.str-contents-wrapper__inner -->
+</main>
+
+<%- include('./inc/footer') %>
+</body>
+</html>

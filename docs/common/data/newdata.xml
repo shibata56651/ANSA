@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<item>
+		<loc>https://test.com/</loc>
+		<lastmod>2020-11-06</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>1.0</priority>
+	</item>
+
+	<item>
+		<loc>https://test.com/blog/</loc>
+		<lastmod>2020-10-16</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+	</item>
+
+  <item>
+    <loc>https://test.com/blog/trip/</loc>
+    <lastmod>2019-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </item>
+
+  <item>
+    <loc>https://test.com/blog/trip/alaska-report/</loc>
+    <lastmod>2019-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </item>
+
+  <item>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+    <lastmod>2019-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </item>
+
+	<item>
+		<loc>https://test.com/about/</loc>
+		<lastmod>2019-06-10</lastmod>
+		<changefreq>yearly</changefreq>
+		<priority>0.8</priority>
+	</item>
+
+	<item>
+		<loc>https://test.com/contact/</loc>
+		<lastmod>2019-06-10</lastmod>
+		<changefreq>yearly</changefreq>
+		<priority>0.8</priority>
+  </item>
+</data>

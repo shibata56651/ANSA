@@ -1,0 +1,7 @@
+@use '../../_common/' as *;
+
+.js-fade-roots {
+  [data-script-enabled="true"] & {
+    opacity: 0;
+  }
+}

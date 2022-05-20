@@ -11199,9 +11199,13 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
 
     var defaultOptions = {
       activeClass: 'is-active',
-      CHANNEL_ID: 'UC53UDnhAAYwvNO7j_2Ju1cQ',
+      CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
+      CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
+      CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
+      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA-gpQ',
       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
-      LIVESTATUS: ''
+      LIVESTATUS: '',
+      JUDGEMENBER: ''
     };
     this.o = Object.assign(defaultOptions);
     this.elements = elements;
@@ -11233,8 +11237,6 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
     value: function onJSClientLoad() {
       var _this = this;
 
-      var API_KEY = "AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc";
-
       var getYouTube = /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(api, query) {
           var cooldown,
@@ -11243,7 +11245,7 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  cooldown = _args.length > 2 && _args[2] !== undefined ? _args[2] : 3000;
+                  cooldown = _args.length > 2 && _args[2] !== undefined ? _args[2] : 300;
                   _context.next = 3;
                   return new Promise(function (r) {
                     return setTimeout(r, cooldown);
@@ -11257,7 +11259,7 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
                         v = _ref3[1];
 
                     return "".concat(p, "&").concat(k, "=").concat(v);
-                  }, "?key=".concat(API_KEY))));
+                  }, "?key=".concat(_this.o.APIKEY))));
 
                 case 5:
                   _context.next = 7;
@@ -11294,17 +11296,38 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
 
                 case 2:
                   playlistId = _context2.sent.items[0].contentDetails.relatedPlaylists.uploads;
-                  _context2.next = 5;
+                  _context2.t0 = channelId;
+                  _context2.next = _context2.t0 === _this.o.CHANNEL_ID_01 ? 6 : _context2.t0 === _this.o.CHANNEL_ID_02 ? 8 : _context2.t0 === _this.o.CHANNEL_ID_03 ? 10 : _context2.t0 === _this.o.CHANNEL_ID_04 ? 12 : 14;
+                  break;
+
+                case 6:
+                  console.log('o1');
+                  return _context2.abrupt("break", 14);
+
+                case 8:
+                  console.log('o2');
+                  return _context2.abrupt("break", 14);
+
+                case 10:
+                  console.log('o3');
+                  return _context2.abrupt("break", 14);
+
+                case 12:
+                  console.log('o4');
+                  return _context2.abrupt("break", 14);
+
+                case 14:
+                  _context2.next = 16;
                   return getYouTube("playlistItems", {
                     part: "snippet",
                     maxResults: 50,
                     playlistId: playlistId
                   });
 
-                case 5:
+                case 16:
                   return _context2.abrupt("return", _context2.sent);
 
-                case 6:
+                case 17:
                 case "end":
                   return _context2.stop();
               }
@@ -11324,36 +11347,50 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
         });
       };
 
-      var liveStatus = function liveStatus(resolveItem) {
+      var liveStatus = function liveStatus(resolveItem, rootitems) {
         console.log(resolveItem);
 
         if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
-          _this.o.LIVESTATUS = '<span class="live-status">LIVE</span>';
+          _this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
         } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
           _this.o.LIVESTATUS = "<span class=\"live-status--live\">LIVE</span>";
         } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
           _this.o.LIVESTATUS = "<span class=\"live-status--upcoming\">\u914D\u4FE1\u4E88\u5B9A</span>";
         }
+
+        rootitems.innerHTML = "<div class=\"items\"><div class=\"items__img\"><a href=\"https://www.youtube.com/watch?v=".concat(resolveItem.items[0].id, "\"><img style=\"width:30%\" src=\"").concat(resolveItem.items[0].snippet.thumbnails.high.url, "\"></a></div>\n    <div class=\"items__text\">").concat(resolveItem.items[0].snippet.title, "</div>\n    ").concat(_this.o.LIVESTATUS, "\n    </div>");
       };
 
       var resolveFunc = function resolveFunc(resolveItem) {
-        // console.log(resolveItem)
         var root = document.createElement('ul');
 
         _this.elements.appendChild(root);
 
-        for (var i = 0; i < 5; i++) {
+        var _loop = function _loop(i) {
           var rootitems = document.createElement('li');
           root.appendChild(rootitems);
           liveStatusFunc(resolveItem, i).then(function (r) {
-            return liveStatus(r);
-          }, rootitems.innerHTML = "<div class=\"items\"><div class=\"items__img\"><a href=\"https://www.youtube.com/watch?v=".concat(resolveItem.items[i].id.videoId, "\"><img style=\"width:30%\" src=\"").concat(resolveItem.items[i].snippet.thumbnails.high.url, "\"></a></div>\n    <div class=\"items__text\">").concat(resolveItem.items[i].snippet.title, "</div>\n    ").concat(_this.o.LIVESTATUS, "\n    </div>"));
-        }
-      };
+            return liveStatus(r, rootitems);
+          });
+        };
 
-      getVideos("UCqKexNL7YoueTlGSNZXoqPQ").then(function (r) {
+        for (var i = 0; i < 5; i++) {
+          _loop(i);
+        }
+      }; // べー
+
+
+      getVideos(this.o.CHANNEL_ID_01).then(function (r) {
+        return resolveFunc(r, _this.o.JUDGEMENBER = '01');
+      }); // ライラさん
+
+      getVideos(this.o.CHANNEL_ID_02).then(function (r) {
         return resolveFunc(r);
-      }); // getLiveVideos("UC53UDnhAAYwvNO7j_2Ju1cQ").then(r => resolveFunc(r));
+      }); // なごみさん
+      // getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r, this.o.JUDGEMENBER='03'));
+      // ろろぬさん
+      // getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r, this.o.JUDGEMENBER='04'));
+      // getLiveVideos("UC53UDnhAAYwvNO7j_2Ju1cQ").then(r => resolveFunc(r));
     }
   }]);
 

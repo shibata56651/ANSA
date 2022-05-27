@@ -12,7 +12,7 @@ export class youtubeAPIFunc {
       CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA-gpQ',
       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
       LIVESTATUS: '',
-      JUDGEMENBER: '',
+      statusFlg: false,
     };
 
     this.o = Object.assign(defaultOptions);
@@ -77,15 +77,26 @@ const getVideos = async (channelId) => {
   })
 };
 
-const liveStatusFunc = (resolveItem, i) => {
+const liveStatusFunc = (resolveItem, i, status) => {
+  // console.log(this.o.statusFlg)
+  // if (!this.o.statusFlg) {
+  //   status = "snippet";
+  //   this.o.statusFlg = true;
+  // } else if (this.o.statusFlg) {
+  //   status = "liveStreamingDetails";
+  //   this.o.statusFlg = false;
+  // }
+
   return getYouTube("videos", {
-    part: "snippet",
+    part: status,
     id: resolveItem.items[i].snippet.resourceId.videoId,
   })
 }
 
-const liveStatus = (resolveItem, rootitems) => {
+const liveStatus = (resolveItem, rootitems, status) => {
+  console.log(status)
   console.log(resolveItem);
+  if (status === 'snippet') {
     if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
       this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
@@ -98,6 +109,7 @@ const liveStatus = (resolveItem, rootitems) => {
     <div class="items__text">${resolveItem.items[0].snippet.title}</div>
     ${this.o.LIVESTATUS}
     </div>`
+  }
 }
 
 const resolveFunc = (resolveItem) => {
@@ -106,23 +118,24 @@ const resolveFunc = (resolveItem) => {
 
   for (let i=0;i < 5; i++) {
     const rootitems = document.createElement('li');
+    let status = "snippet";
     root.appendChild(rootitems);
 
-    liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems));
+    liveStatusFunc(resolveItem, i, "snippet").then(r => liveStatus(r, rootitems, "snippet"));
+    liveStatusFunc(resolveItem, i, "liveStreamingDetails").then(r => liveStatus(r, rootitems, "liveStreamingDetails"));
   }
 }
 
 // べー
-getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r, this.o.JUDGEMENBER='01'));
+getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
 
 // ライラさん
 getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
 
 // なごみさん
-// getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r, this.o.JUDGEMENBER='03'));
+getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r));
 
 // ろろぬさん
-// getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r, this.o.JUDGEMENBER='04'));
-// getLiveVideos("UC53UDnhAAYwvNO7j_2Ju1cQ").then(r => resolveFunc(r));
+getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r));
   }
 }

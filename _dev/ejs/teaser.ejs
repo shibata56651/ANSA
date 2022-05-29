@@ -56,37 +56,13 @@ const page = {
 <body>
   <%- include('./inc/header') %>
 
-<main class="str-contents-wrapper">
+<main class="str-contents-wrapper--teaser">
 <div class="str-contents-wrapper__inner">
 <div class="mv">
 <div class="mv__content">
-
+<img src="/docs/common/images/img-bg-01.jpg" alt="">
 </div><!-- /.mv__content -->
 </div><!-- /.mv -->
-
-<form name="questionForm" class="js-mail-root" method="post" enctype="text/plain">
-<div class="form-item">
-<p><label for="name">お名前</label></p>
-<input name="questionFormName" type="text" id="name">
-</div><!-- /.form-item -->
-
-<div class="form-item">
-<p><label for="address">メールアドレス</label></p>
-<input name="questionFormEmail" type="email" id="address">
-</div><!-- /.form-item -->
-
-<div class="form-item">
-<p><label for="contact">問い合わせ内容</label></p>
-<textarea name="questionFormContact" id="contact" cols="30" rows="10"></textarea>
-</div><!-- /.form-item -->
-
-<button id="js-mail-btn">送信</button>
-</form>
-
-<div id="live"></div>
-
-<div id="js-youtube-root"></div>
-
 </div><!-- /.str-contents-wrapper__inner -->
 </main>
 

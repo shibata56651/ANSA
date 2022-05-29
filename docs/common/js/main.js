@@ -11377,11 +11377,14 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
         for (var i = 0; i < 5; i++) {
           _loop(i);
         }
-      }; // べー
+      };
 
+      getVideos(this.o.CHANNEL_ID_02).then(function (r) {
+        return resolveFunc(r);
+      }); // べー
 
       getVideos(this.o.CHANNEL_ID_01).then(function (r) {
-        return resolveFunc(r, _this.o.JUDGEMENBER = '01');
+        return resolveFunc(r);
       }); // ライラさん
 
       getVideos(this.o.CHANNEL_ID_02).then(function (r) {
@@ -11390,7 +11393,6 @@ var youtubeAPIFunc = /*#__PURE__*/function () {
       // getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r, this.o.JUDGEMENBER='03'));
       // ろろぬさん
       // getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r, this.o.JUDGEMENBER='04'));
-      // getLiveVideos("UC53UDnhAAYwvNO7j_2Ju1cQ").then(r => resolveFunc(r));
     }
   }]);
 

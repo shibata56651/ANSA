@@ -111,9 +111,9 @@ const resolveFunc = (resolveItem) => {
     liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems));
   }
 }
-
+getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
 // べー
-getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r, this.o.JUDGEMENBER='01'));
+getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
 
 // ライラさん
 getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
@@ -123,6 +123,5 @@ getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
 
 // ろろぬさん
 // getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r, this.o.JUDGEMENBER='04'));
-// getLiveVideos("UC53UDnhAAYwvNO7j_2Ju1cQ").then(r => resolveFunc(r));
   }
 }

@@ -9,7 +9,7 @@ export class youtubeAPIFunc {
       CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
       CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
       CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
-      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA-gpQ',
+      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
       LIVESTATUS: '',
       statusFlg: false,
@@ -52,21 +52,24 @@ const getVideos = async (channelId) => {
     })
   ).items[0].contentDetails.relatedPlaylists.uploads;
 
+  const playlistIdId = (
+    await getYouTube("playlistItems", {
+      part: "liveStreamingDetails",
+      id: channelId,
+    })
+  ).items[0];
+
   switch (channelId) {
     case this.o.CHANNEL_ID_01:
-      console.log('o1')
       break;
 
-      case this.o.CHANNEL_ID_02:
-        console.log('o2')
-        break;
-
-      case this.o.CHANNEL_ID_03:
-        console.log('o3')
+    case this.o.CHANNEL_ID_02:
       break;
 
-      case this.o.CHANNEL_ID_04:
-        console.log('o4')
+    case this.o.CHANNEL_ID_03:
+      break;
+
+    case this.o.CHANNEL_ID_04:
       break;
   }
 
@@ -74,42 +77,41 @@ const getVideos = async (channelId) => {
     part: "snippet",
     maxResults: 50,
     playlistId,
+    playlistIdId,
   })
 };
 
-const liveStatusFunc = (resolveItem, i, status) => {
-  // console.log(this.o.statusFlg)
-  // if (!this.o.statusFlg) {
-  //   status = "snippet";
-  //   this.o.statusFlg = true;
-  // } else if (this.o.statusFlg) {
-  //   status = "liveStreamingDetails";
-  //   this.o.statusFlg = false;
-  // }
+// const liveStatusFunc = (resolveItem, i, status) => {
+//   console.log(this.o.statusFlg)
+//   if (!this.o.statusFlg) {
+//     status = "snippet";
+//     this.o.statusFlg = true;
+//   } else if (this.o.statusFlg) {
+//     status = "liveStreamingDetails";
+//     this.o.statusFlg = false;
+//   }
 
-  return getYouTube("videos", {
-    part: status,
-    id: resolveItem.items[i].snippet.resourceId.videoId,
-  })
-}
+//   return getYouTube("videos", {
+//     part: status,
+//     id: resolveItem.items[i].snippet.resourceId.videoId,
+//   })
+// }
 
 const liveStatus = (resolveItem, rootitems, status) => {
-  console.log(status)
-  console.log(resolveItem);
-  if (status === 'snippet') {
-    if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
-      this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
-    } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
-      this.o.LIVESTATUS = `<span class="live-status--live">LIVE</span>`;
-    } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
-      this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
-    }
+  // if (status === 'snippet') {
+  //   if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
+  //     this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
+  //   } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
+  //     this.o.LIVESTATUS = `<span class="live-status--live">LIVE</span>`;
+  //   } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
+  //     this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
+  //   }
+  // }
 
-    rootitems.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
-    <div class="items__text">${resolveItem.items[0].snippet.title}</div>
-    ${this.o.LIVESTATUS}
-    </div>`
-  }
+  rootitems.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
+  <div class="items__text">${resolveItem.items[0].snippet.title}</div>
+  ${this.o.LIVESTATUS}
+  </div>`
 }
 
 const resolveFunc = (resolveItem) => {
@@ -122,7 +124,7 @@ const resolveFunc = (resolveItem) => {
     root.appendChild(rootitems);
 
     liveStatusFunc(resolveItem, i, "snippet").then(r => liveStatus(r, rootitems, "snippet"));
-    liveStatusFunc(resolveItem, i, "liveStreamingDetails").then(r => liveStatus(r, rootitems, "liveStreamingDetails"));
+    // liveStatusFunc(resolveItem, i, "liveStreamingDetails").then(r => liveStatus(r, rootitems, "liveStreamingDetails"));
   }
 }
 

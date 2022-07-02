@@ -518,43 +518,6 @@ header {
   left: 0;
 }
 
-.str-contents-wrapper__inner > .spot-light {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: block;
-  width: 100%;
-  height: 100vh;
-  background: #0d0d36;
-}
-.str-contents-wrapper__inner > .spot-light::before {
-  display: block;
-  position: absolute;
-  content: "";
-  top: -61%;
-  left: 4%;
-  width: 460px;
-  height: 120%;
-  background-color: cyan;
-  clip-path: polygon(44% 0, 56% 0, 90% 100%, 10% 100%);
-  opacity: 0.3;
-  animation: spotlightAnimation 3s linear infinite alternate;
-}
-.str-contents-wrapper__inner > .spot-light::after {
-  display: block;
-  position: absolute;
-  content: "";
-  top: -61%;
-  right: 4%;
-  width: 460px;
-  height: 120%;
-  background-color: magenta;
-  clip-path: polygon(44% 0, 56% 0, 90% 100%, 10% 100%);
-  opacity: 0.3;
-  animation: spotlightAnimation 3s 0.3s linear infinite alternate-reverse;
-}
-
 .mv {
   width: 100%;
   height: 100vh;

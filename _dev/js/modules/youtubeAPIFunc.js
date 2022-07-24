@@ -9,8 +9,9 @@ export class youtubeAPIFunc {
       CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
       CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
       CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
-      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA-gpQ',
+      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
+      ID: '',
       LIVESTATUS: '',
       statusFlg: false,
     };
@@ -54,19 +55,15 @@ const getVideos = async (channelId) => {
 
   switch (channelId) {
     case this.o.CHANNEL_ID_01:
-      console.log('o1')
       break;
 
       case this.o.CHANNEL_ID_02:
-        console.log('o2')
         break;
 
       case this.o.CHANNEL_ID_03:
-        console.log('o3')
       break;
 
       case this.o.CHANNEL_ID_04:
-        console.log('o4')
       break;
   }
 
@@ -77,26 +74,24 @@ const getVideos = async (channelId) => {
   })
 };
 
-const liveStatusFunc = (resolveItem, i, status) => {
-  // console.log(this.o.statusFlg)
-  // if (!this.o.statusFlg) {
-  //   status = "snippet";
-  //   this.o.statusFlg = true;
-  // } else if (this.o.statusFlg) {
-  //   status = "liveStreamingDetails";
-  //   this.o.statusFlg = false;
-  // }
-
+const liveStatusFunc = (resolveItem, i) => {
   return getYouTube("videos", {
-    part: status,
+    part: "snippet",
     id: resolveItem.items[i].snippet.resourceId.videoId,
   })
 }
 
-const liveStatus = (resolveItem, rootitems, status) => {
-  console.log(status)
-  console.log(resolveItem);
-  if (status === 'snippet') {
+const liveFunc = (resolveItem, i) => {
+  return getYouTube("videos", {
+    part: "liveStreamingDetails",
+    id: resolveItem.items[i].snippet.resourceId.videoId,
+  })
+}
+
+const liveStatus = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
+  // console.log(resolveItem.items[0])
+
+  if (resolveItem.items[0].snippet) {
     if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
       this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
@@ -105,24 +100,35 @@ const liveStatus = (resolveItem, rootitems, status) => {
       this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
     }
 
-    rootitems.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
+    moviecontent.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
     <div class="items__text">${resolveItem.items[0].snippet.title}</div>
     ${this.o.LIVESTATUS}
-    </div>`
+    </div>`;
   }
 }
+
+const liveDetailsFunc = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
+  detailcontent.innerHTML = `<div class="items"><p class="scheduled">${resolveItem.items[0].liveStreamingDetails.scheduledStartTime}</p></div>`
+
+  // console.log("livestreaming："+resolveItem.items[0]);
+};
 
 const resolveFunc = (resolveItem) => {
   const root = document.createElement('ul');
   this.elements.appendChild(root);
 
-  for (let i=0;i < 5; i++) {
+  for (let i=0;i <15; i++) {
     const rootitems = document.createElement('li');
-    let status = "snippet";
+    const moviecontent = document.createElement('div');
+    moviecontent.classList.add('movie-content');
+    const detailcontent = document.createElement('div');
+    detailcontent.classList.add('details-content');
     root.appendChild(rootitems);
+    rootitems.appendChild(moviecontent);
+    rootitems.appendChild(detailcontent);
 
-    liveStatusFunc(resolveItem, i, "snippet").then(r => liveStatus(r, rootitems, "snippet"));
-    liveStatusFunc(resolveItem, i, "liveStreamingDetails").then(r => liveStatus(r, rootitems, "liveStreamingDetails"));
+    liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems, i, moviecontent, detailcontent));
+    liveFunc(resolveItem, i).then(r => liveDetailsFunc(r, rootitems, i, moviecontent, detailcontent));
   }
 }
 

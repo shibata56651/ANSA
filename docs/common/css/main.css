@@ -287,119 +287,28 @@ textarea,
   position: absolute;
 }
 
-@keyframes mvAnimation {
-  100% {
-    display: block;
-  }
-}
-@keyframes menuCloseAnimation {
+@keyframes spotlightAnimation {
   0% {
-    width: 36px;
-    height: 36px;
-    transform: scale(80);
+    transform: rotate(25deg);
   }
   100% {
-    transform: scale(1);
+    transform: rotate(-20deg);
   }
 }
-@keyframes menuFadeInAnimation {
+@keyframes loading {
   0% {
-    transform: translateY(10px);
-    opacity: 0;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) 100px, rgba(0, 0, 0, 0.4) 100px, rgba(0, 0, 0, 0.4));
   }
   100% {
-    transform: translateY(0);
-    opacity: 1;
+    background: radial-gradient(circle, transparent, transparent 100px, rgba(0, 0, 0, 0.4) 100px, rgba(0, 0, 0, 0.4));
   }
 }
-@keyframes menuCloseFadeInAnimation {
+@keyframes loadingFinish {
   0% {
-    transform: translateY(0);
-    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
   100% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-}
-@keyframes historyExtendLineAnimation {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: calc(100% - 80px);
-  }
-}
-@keyframes historyFadeInAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes mvCarouselChangeAnimation {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(10);
-  }
-}
-@keyframes mvCarouselAnimation {
-  0% {
-    clip-path: circle(0% at 50% 50%);
-    opacity: 1;
-  }
-  100% {
-    clip-path: circle(100% at 50% 50%);
-    opacity: 1;
-  }
-}
-@keyframes pickUpAnimation {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes menuSlideLeftInAnimation {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes menuSlideRightInAnimation {
-  0% {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes businessToggleAnimation {
-  0% {
-    display: block;
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes cardAnimation {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0% 0%);
   }
 }
 html {
@@ -518,6 +427,47 @@ header {
   left: 0;
 }
 
+.str-contents-wrapper__inner > .spot-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background: #0d0d36;
+}
+.str-contents-wrapper__inner > .spot-light::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -5%;
+  left: 4%;
+  width: 460px;
+  height: 120%;
+  background-color: cyan;
+  clip-path: polygon(44% 0, 56% 0, 90% 100%, 10% 100%);
+  opacity: 0.3;
+  transform: translate(0, -100%);
+  transform-origin: center top;
+  animation: spotlightAnimation 3s linear infinite alternate;
+}
+.str-contents-wrapper__inner > .spot-light::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -5%;
+  right: 4%;
+  width: 460px;
+  height: 140%;
+  background-color: magenta;
+  clip-path: polygon(44% 0, 56% 0, 90% 100%, 10% 100%);
+  transform: translate(0, -100%);
+  transform-origin: center top;
+  opacity: 0.3;
+  animation: spotlightAnimation 3s 0.3s linear infinite alternate-reverse;
+}
+
 .mv {
   width: 100%;
   height: 100vh;
@@ -541,6 +491,66 @@ header {
   color: #222a38;
   font-family: "Noto Serif JP", serif;
   font-size: 0.8rem;
+}
+
+.js-load-indicator {
+  display: block;
+  width: 0%;
+  height: 3px;
+  background-color: #fff;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.loading::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #222222;
+}
+.loading__wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  animation: loading 4s forwards;
+}
+.loading__wrap::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.loading__wrap::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.loading__items {
+  position: relative;
+  max-width: 450px;
+}
+.loading__items--logo {
+  max-width: 227px;
+  margin-top: -10px;
 }
 
 .nav-list-contents .header-icon-arrow-a {

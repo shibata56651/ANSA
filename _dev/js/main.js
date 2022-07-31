@@ -265,7 +265,7 @@ import "scroll-behavior-polyfill";
 
   const tabRoots = doc.querySelectorAll('.js-tab-hook');
 
-  if (tabRoots) {
+  if (tabRoots.length) {
     for (const item of tabRoots) {
       new tab(item, tabRoots);
     }
@@ -342,6 +342,9 @@ import "scroll-behavior-polyfill";
               loadingRoot.classList.add('is-load');
               // ローディングの終了
               clearInterval(nowLoading);
+              const loadedScreen = document.createElement('span');
+              loadedScreen.classList.add('js-screen');
+              document.body.appendChild(loadedScreen);
             }, 300);
           }
         }
@@ -402,10 +405,10 @@ import "scroll-behavior-polyfill";
       new mvAnimation(animationRoot);
     }
 
-    const youtubeAPIRoot = doc.getElementById('js-youtube-root');
+    // const youtubeAPIRoot = doc.getElementById('js-youtube-root');
 
-    if (youtubeAPIRoot) {
-      new youtubeAPIFunc(youtubeAPIRoot);
-    }
+    // if (youtubeAPIRoot) {
+    //   new youtubeAPIFunc(youtubeAPIRoot);
+    // }
 
 })(window, document);

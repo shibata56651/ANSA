@@ -10168,7 +10168,7 @@ var tab = /*#__PURE__*/function () {
         _iterator2.f();
       }
 
-      var href = e.target.getAttribute('href').substring(1);
+      var href = this.element.getAttribute('href').substring(1);
       this.tabItem = document.getElementById(href);
       this.element.parentNode.classList.add(this.activeClass);
       this.content.classList.add(this.activeClass);
@@ -10557,266 +10557,132 @@ var xmlGetData = /*#__PURE__*/function () {
 /*!*******************************************!*\
   !*** ./_dev/js/modules/youtubeAPIFunc.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ (function() {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "youtubeAPIFunc": function() { return /* binding */ youtubeAPIFunc; }
-/* harmony export */ });
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var youtubeAPIFunc = /*#__PURE__*/function () {
-  /**
-   * @param  {Element} elements rootとなる要素
-   * @returns void
-   */
-  function youtubeAPIFunc() {
-    var elements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, youtubeAPIFunc);
-
-    var defaultOptions = {
-      activeClass: 'is-active',
-      CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
-      CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
-      CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
-      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
-      APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
-      ID: '',
-      LIVESTATUS: '',
-      statusFlg: false
-    };
-    this.o = Object.assign(defaultOptions);
-    this.elements = elements;
-    this.liveElm = document.getElementById('live');
-    this.init();
-  }
-  /**
-   * 初期化処理
-   *
-   * @returns void
-   */
-
-
-  _createClass(youtubeAPIFunc, [{
-    key: "init",
-    value: function init() {
-      window.addEventListener('load', this.onJSClientLoad.bind(this));
-    }
-    /**
-     * ページロード時にスライドショーを再生する
-     *
-     * @returns void
-     */
-
-    /* APIロード */
-
-  }, {
-    key: "onJSClientLoad",
-    value: function onJSClientLoad() {
-      var _this = this;
-
-      var getYouTube = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(api, query) {
-          var cooldown,
-              _args = arguments;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  cooldown = _args.length > 2 && _args[2] !== undefined ? _args[2] : 300;
-                  _context.next = 3;
-                  return new Promise(function (r) {
-                    return setTimeout(r, cooldown);
-                  });
-
-                case 3:
-                  _context.next = 5;
-                  return fetch("https://www.googleapis.com/youtube/v3/".concat(api).concat(Object.entries(query).reduce(function (p, _ref2) {
-                    var _ref3 = _slicedToArray(_ref2, 2),
-                        k = _ref3[0],
-                        v = _ref3[1];
-
-                    return "".concat(p, "&").concat(k, "=").concat(v);
-                  }, "?key=".concat(_this.o.APIKEY))));
-
-                case 5:
-                  _context.next = 7;
-                  return _context.sent.json();
-
-                case 7:
-                  return _context.abrupt("return", _context.sent);
-
-                case 8:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-
-        return function getYouTube(_x, _x2) {
-          return _ref.apply(this, arguments);
-        };
-      }();
-
-      var getVideos = /*#__PURE__*/function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(channelId) {
-          var playlistId;
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return getYouTube("channels", {
-                    part: "contentDetails",
-                    id: channelId
-                  });
-
-                case 2:
-                  playlistId = _context2.sent.items[0].contentDetails.relatedPlaylists.uploads;
-                  _context2.t0 = channelId;
-                  _context2.next = _context2.t0 === _this.o.CHANNEL_ID_01 ? 6 : _context2.t0 === _this.o.CHANNEL_ID_02 ? 7 : _context2.t0 === _this.o.CHANNEL_ID_03 ? 8 : _context2.t0 === _this.o.CHANNEL_ID_04 ? 9 : 10;
-                  break;
-
-                case 6:
-                  return _context2.abrupt("break", 10);
-
-                case 7:
-                  return _context2.abrupt("break", 10);
-
-                case 8:
-                  return _context2.abrupt("break", 10);
-
-                case 9:
-                  return _context2.abrupt("break", 10);
-
-                case 10:
-                  _context2.next = 12;
-                  return getYouTube("playlistItems", {
-                    part: "snippet",
-                    maxResults: 50,
-                    playlistId: playlistId
-                  });
-
-                case 12:
-                  return _context2.abrupt("return", _context2.sent);
-
-                case 13:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-
-        return function getVideos(_x3) {
-          return _ref4.apply(this, arguments);
-        };
-      }();
-
-      var liveStatusFunc = function liveStatusFunc(resolveItem, i) {
-        return getYouTube("videos", {
-          part: "snippet",
-          id: resolveItem.items[i].snippet.resourceId.videoId
-        });
-      };
-
-      var liveFunc = function liveFunc(resolveItem, i) {
-        return getYouTube("videos", {
-          part: "liveStreamingDetails",
-          id: resolveItem.items[i].snippet.resourceId.videoId
-        });
-      };
-
-      var liveStatus = function liveStatus(resolveItem, rootitems, i, moviecontent, detailcontent) {
-        // console.log(resolveItem.items[0])
-        if (resolveItem.items[0].snippet) {
-          if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
-            _this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
-          } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
-            _this.o.LIVESTATUS = "<span class=\"live-status--live\">LIVE</span>";
-          } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
-            _this.o.LIVESTATUS = "<span class=\"live-status--upcoming\">\u914D\u4FE1\u4E88\u5B9A</span>";
-          }
-
-          moviecontent.innerHTML = "<div class=\"items\"><div class=\"items__img\"><a href=\"https://www.youtube.com/watch?v=".concat(resolveItem.items[0].id, "\"><img style=\"width:30%\" src=\"").concat(resolveItem.items[0].snippet.thumbnails.high.url, "\"></a></div>\n    <div class=\"items__text\">").concat(resolveItem.items[0].snippet.title, "</div>\n    ").concat(_this.o.LIVESTATUS, "\n    </div>");
-        }
-      };
-
-      var liveDetailsFunc = function liveDetailsFunc(resolveItem, rootitems, i, moviecontent, detailcontent) {
-        detailcontent.innerHTML = "<div class=\"items\"><p class=\"scheduled\">".concat(resolveItem.items[0].liveStreamingDetails.scheduledStartTime, "</p></div>"); // console.log("livestreaming："+resolveItem.items[0]);
-      };
-
-      var resolveFunc = function resolveFunc(resolveItem) {
-        var root = document.createElement('ul');
-
-        _this.elements.appendChild(root);
-
-        var _loop = function _loop(i) {
-          var rootitems = document.createElement('li');
-          var moviecontent = document.createElement('div');
-          moviecontent.classList.add('movie-content');
-          var detailcontent = document.createElement('div');
-          detailcontent.classList.add('details-content');
-          root.appendChild(rootitems);
-          rootitems.appendChild(moviecontent);
-          rootitems.appendChild(detailcontent);
-          liveStatusFunc(resolveItem, i).then(function (r) {
-            return liveStatus(r, rootitems, i, moviecontent, detailcontent);
-          });
-          liveFunc(resolveItem, i).then(function (r) {
-            return liveDetailsFunc(r, rootitems, i, moviecontent, detailcontent);
-          });
-        };
-
-        for (var i = 0; i < 15; i++) {
-          _loop(i);
-        }
-      }; // べー
-
-
-      getVideos(this.o.CHANNEL_ID_01).then(function (r) {
-        return resolveFunc(r);
-      }); // ライラさん
-
-      getVideos(this.o.CHANNEL_ID_02).then(function (r) {
-        return resolveFunc(r);
-      }); // なごみさん
-
-      getVideos(this.o.CHANNEL_ID_03).then(function (r) {
-        return resolveFunc(r);
-      }); // ろろぬさん
-
-      getVideos(this.o.CHANNEL_ID_04).then(function (r) {
-        return resolveFunc(r);
-      });
-    }
-  }]);
-
-  return youtubeAPIFunc;
-}();
+// export class youtubeAPIFunc {
+//   /**
+//    * @param  {Element} elements rootとなる要素
+//    * @returns void
+//    */
+//   constructor(elements = {}) {
+//     const defaultOptions = {
+//       activeClass: 'is-active',
+//       CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
+//       CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
+//       CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
+//       CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
+//       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
+//       ID: '',
+//       LIVESTATUS: '',
+//       statusFlg: false,
+//     };
+//     this.o = Object.assign(defaultOptions);
+//     this.elements = elements;
+//     this.liveElm = document.getElementById('live');
+//     this.init();
+//   }
+//   /**
+//    * 初期化処理
+//    *
+//    * @returns void
+//    */
+//   init() {
+//     window.addEventListener('load', this.onJSClientLoad.bind(this));
+//   }
+//   /**
+//    * ページロード時にスライドショーを再生する
+//    *
+//    * @returns void
+//    */
+//   /* APIロード */
+//   onJSClientLoad() {
+// const getYouTube = async (api, query, cooldown = 300) => {
+//   await new Promise((r) => setTimeout(r, cooldown));
+//   return await (
+//     await fetch(`https://www.googleapis.com/youtube/v3/${api}${Object.entries(query).reduce((p, [k, v]) => `${p}&${k}=${v}`, `?key=${this.o.APIKEY}`)}`)
+//   ).json();
+// };
+// const getVideos = async (channelId) => {
+//   const playlistId = (
+//     await getYouTube("channels", {
+//       part: "contentDetails",
+//       id: channelId,
+//     })
+//   ).items[0].contentDetails.relatedPlaylists.uploads;
+//   switch (channelId) {
+//     case this.o.CHANNEL_ID_01:
+//       break;
+//       case this.o.CHANNEL_ID_02:
+//         break;
+//       case this.o.CHANNEL_ID_03:
+//       break;
+//       case this.o.CHANNEL_ID_04:
+//       break;
+//   }
+//   return await getYouTube("playlistItems", {
+//     part: "snippet",
+//     maxResults: 50,
+//     playlistId,
+//   })
+// };
+// const liveStatusFunc = (resolveItem, i) => {
+//   return getYouTube("videos", {
+//     part: "snippet",
+//     id: resolveItem.items[i].snippet.resourceId.videoId,
+//   })
+// }
+// const liveFunc = (resolveItem, i) => {
+//   return getYouTube("videos", {
+//     part: "liveStreamingDetails",
+//     id: resolveItem.items[i].snippet.resourceId.videoId,
+//   })
+// }
+// const liveStatus = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
+//   // console.log(resolveItem.items[0])
+//   if (resolveItem.items[0].snippet) {
+//     if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
+//       this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
+//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
+//       this.o.LIVESTATUS = `<span class="live-status--live">LIVE</span>`;
+//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
+//       this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
+//     }
+//     moviecontent.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
+//     <div class="items__text">${resolveItem.items[0].snippet.title}</div>
+//     ${this.o.LIVESTATUS}
+//     </div>`;
+//   }
+// }
+// const liveDetailsFunc = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
+//   detailcontent.innerHTML = `<div class="items"><p class="scheduled">${resolveItem.items[0].liveStreamingDetails.scheduledStartTime}</p></div>`
+//   // console.log("livestreaming："+resolveItem.items[0]);
+// };
+// const resolveFunc = (resolveItem) => {
+//   const root = document.createElement('ul');
+//   this.elements.appendChild(root);
+//   for (let i=0;i <15; i++) {
+//     const rootitems = document.createElement('li');
+//     const moviecontent = document.createElement('div');
+//     moviecontent.classList.add('movie-content');
+//     const detailcontent = document.createElement('div');
+//     detailcontent.classList.add('details-content');
+//     root.appendChild(rootitems);
+//     rootitems.appendChild(moviecontent);
+//     rootitems.appendChild(detailcontent);
+//     liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems, i, moviecontent, detailcontent));
+//     liveFunc(resolveItem, i).then(r => liveDetailsFunc(r, rootitems, i, moviecontent, detailcontent));
+//   }
+// }
+// // べー
+// getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
+// // ライラさん
+// getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
+// // なごみさん
+// getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r));
+// // ろろぬさん
+// getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r));
+//   }
+// }
 
 /***/ }),
 
@@ -24945,6 +24811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_xmlGetData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/xmlGetData */ "./_dev/js/modules/xmlGetData.js");
 /* harmony import */ var _modules_mvAnimation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/mvAnimation */ "./_dev/js/modules/mvAnimation.js");
 /* harmony import */ var _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/youtubeAPIFunc */ "./_dev/js/modules/youtubeAPIFunc.js");
+/* harmony import */ var _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var scroll_behavior_polyfill__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! scroll-behavior-polyfill */ "./node_modules/scroll-behavior-polyfill/dist/index.js");
@@ -25235,7 +25102,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var tabRoots = doc.querySelectorAll('.js-tab-hook');
 
-  if (tabRoots) {
+  if (tabRoots.length) {
     var _iterator3 = _createForOfIteratorHelper(tabRoots),
         _step3;
 
@@ -25336,6 +25203,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
               loadingRoot.classList.add('is-load'); // ローディングの終了
 
               clearInterval(nowLoading);
+              var loadedScreen = document.createElement('span');
+              loadedScreen.classList.add('js-screen');
+              document.body.appendChild(loadedScreen);
             }, 300);
           }
         }
@@ -25413,13 +25283,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   if (animationRoot) {
     new _modules_mvAnimation__WEBPACK_IMPORTED_MODULE_10__.mvAnimation(animationRoot);
-  }
+  } // const youtubeAPIRoot = doc.getElementById('js-youtube-root');
+  // if (youtubeAPIRoot) {
+  //   new youtubeAPIFunc(youtubeAPIRoot);
+  // }
 
-  var youtubeAPIRoot = doc.getElementById('js-youtube-root');
-
-  if (youtubeAPIRoot) {
-    new _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__.youtubeAPIFunc(youtubeAPIRoot);
-  }
 })(window, document);
 }();
 /******/ })()

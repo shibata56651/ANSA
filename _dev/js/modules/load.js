@@ -33,7 +33,6 @@ export class load {
  * @returns void
  */
   loadHandler(e) {
-    console.log('xxxxxxxxxxxxxxx')
     // ローディング画面
     const images = document.getElementsByTagName('img'); // ページ内のimgタグを取得
     const loadingGauge = document.querySelector('.js-load-indicator'); // リアルタイムで読み込まれるゲージ部分
@@ -59,7 +58,6 @@ export class load {
     // setIntervalを使って一定時間ごとに処理を繰り返す
     const nowLoading = setInterval(() => {
       // baseCountingがimgCountingより大きくならない条件の場合に処理を実行させる。2回目以降にページを読み込んだ時に画像の読み込み履歴が残っている関係で、ローディング画面の表示が速く終わってしまうため、その対策として条件をつけている。
-      console.log('111111111111111')
       if (baseCounting <= imgCounting) {
         // リアルタイムで読み込んでいるパーセントを取得
         current = Math.floor(baseCounting / images.length * 100);
@@ -72,6 +70,9 @@ export class load {
           setTimeout(function () {
             // ローディング画面全体の非表示
             loadingRoot.classList.add('is-load');
+            const loadedScreen = document.createElement('span');
+            loadedScreen.classList.add('js-screen');
+            document.body.appendChild(loadedScreen);
             // ローディングの終了
             clearInterval(nowLoading);
           }, 300);

@@ -56,31 +56,179 @@ const page = {
 <body>
   <%- include('./inc/header') %>
 
+<div class="loading js-loading">
+<div class="loading__wrap">
+<span class="loading__items">
+<img src="./common/images/img-character-silhouette-02.png" alt="">
+</span>
+<span class="loading__items">
+<img src="./common/images/img-character-silhouette-01.png" alt="">
+</span>
+<span class="loading__items loading__items--logo">
+<img class="icon-logo-a" src="./common/images/logo-02.png" alt="ANSA">
+<span class="js-load-indicator"></span>
+</span>
+<span class="loading__items">
+<img src="./common/images/img-character-silhouette-03.png" alt="">
+</span>
+<span class="loading__items">
+<img src="./common/images/img-character-silhouette-04.png" alt="">
+</span>
+</div><!-- /.loading__wrap -->
+</div><!-- /.loading -->
+
 <main class="str-contents-wrapper">
-<div class="str-contents-wrapper__inner">
+<span class="spot-light"></span>
+
 <div class="mv">
 <div class="mv__content">
-<!-- <div class="mv__animation-wrap">
-  <p class="mv__animation-wrap--text mv__animation-01"><span class="view-item">この</span><span class="view-item">ページは</span><span class="view-item">ポートフォリオサイト</span><span class="view-item">です。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-02"><span class="view-item">24歳の男。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-03"><span class="view-item"><b>JavaScript</b>が</span><span class="view-item">できます！</span></p>
-  <p class="mv__animation-wrap--text mv__animation-04"><span class="view-item">タピオカは</span><span class="view-item"><b>邪道</b>だと思います。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-05"><span class="view-item">実は</span><span class="view-item">ポテト</span><span class="view-item">って</span><span class="view-item">神の産物</span><span class="view-item">なんですよね。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-06"><span class="view-item">アジアンライス</span><span class="view-item">をたまに食べると</span><span class="view-item">そのありがたみを知れる。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-07"><span class="view-item">丼ものなら</span><span class="view-item">毎日食べても</span><span class="view-item">飽きない！！</span></p>
-  <p class="mv__animation-wrap--text mv__animation-08"><span class="view-item">トマト</span><span class="view-item">は行ける</span><span class="view-item">んですけどね...</span><span class="view-item">ナスは</span><span class="view-item">駄目</span><span class="view-item">なんですよ。</span><span class="view-item">ナス</span><span class="view-item">だけは。。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-09"><span class="view-item">芋なのに</span><span class="view-item">甘いって。。</span><span class="view-item">甘すぎる。</span><span class="view-item">私にとっては</span></p>
-  <p class="mv__animation-wrap--text mv__animation-10"><span class="view-item">得意な</span><span class="view-item">プログラミング</span><span class="view-item">言語？？</span><span class="view-item">フッ...</span><span class="view-item">ないよ。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-11"><span class="view-item">PHP？</span><span class="view-item">雰囲気でならかけますよ？</span></p>
-  <p class="mv__animation-wrap--text mv__animation-12"><span class="view-item">JavaScript</span><span class="view-item">ですか。</span><span class="view-item">彼とは</span><span class="view-item">いささか</span><span class="view-item">因縁</span><span class="view-item">がありましてね。</span><span class="view-item">予想工程の</span><span class="view-item">倍</span><span class="view-item">頂ければ</span><span class="view-item">対応</span><span class="view-item">可能</span><span class="view-item">です。</span></p>
-  <p class="mv__animation-wrap--text mv__animation-13"><span class="view-item">環境は</span><span class="view-item">Webpack</span><span class="view-item">使ってますよ。</span><span class="view-item">かっこいい</span><span class="view-item">じゃない</span><span class="view-item">ですか。</span></p>
-</div>/.mv__animation-wrap -->
+<span class="mv__items"><img src="./common/images/img-character-02.png" alt=""></span>
+<span class="mv__items"><img src="./common/images/img-character-01.png" alt=""></span>
+<span class="mv__items mv__items--logo">
+<h1><img class="icon-logo-a" src="./common/images/logo-02.png" alt="ANSA"></h1></span>
+<span class="mv__items"><img src="./common/images/img-character-03.png" alt=""></span>
+<span class="mv__items"><img src="./common/images/img-character-04.png" alt=""></span>
 </div><!-- /.mv__content -->
 </div><!-- /.mv -->
 
+<div class="str-contents-wrapper__inner">
+<h2 class="hdg-a">お知らせ</h2>
+
+<div class="news">
+<div class="news__lists">
+<ul>
+<li class="is-active"><a class="js-tab-hook" href="#tab-01"><span>赤蕾ライラ</span></a></li>
+<li><a class="js-tab-hook" href="#tab-02"><span>猫屋べー</span></a></li>
+<li><a class="js-tab-hook" href="#tab-03"><span>桜なごみ</span></a></li>
+<li><a class="js-tab-hook" href="#tab-04"><span>甘香ろろぬ</span></a></li>
+<li><a class="js-tab-hook" href="#tab-05"><span>ANSA</span></a></li>
+</ul>
+</div><!-- /.news__lists -->
+<div class="news__content">
+<div class="js-display-contents">
+<div id="tab-01" class="news__content-items js-tab-item is-active">
+<ul>
+<li>あああああああああああ</li>
+<li>あああああああああああ</li>
+<li>あああああああああああ</li>
+<li>あああああああああああ</li>
+</ul>
+</div><!-- /.news__content-items -->
+<div id="tab-02" class="news__content-items js-tab-item">
+<ul>
+<li>いいいいいいいいいいい</li>
+<li>いいいいいいいいいいい</li>
+<li>いいいいいいいいいいい</li>
+<li>いいいいいいいいいいい</li>
+</ul>
+</div><!-- /.news__content-items -->
+<div id="tab-03" class="news__content-items js-tab-item">
+<ul>
+<li>ううううううううう</li>
+<li>ううううううううう</li>
+<li>ううううううううう</li>
+<li>ううううううううう</li>
+</ul>
+</div><!-- /.news__content-items -->
+<div id="tab-04" class="news__content-items js-tab-item">
+<ul>
+<li>ええええええええええ</li>
+<li>ええええええええええ</li>
+<li>ええええええええええ</li>
+<li>ええええええええええ</li>
+</ul>
+</div><!-- /.news__content-items -->
+<div id="tab-05" class="news__content-items js-tab-item">
+<ul>
+<li>おおおおおおおおおおお</li>
+<li>おおおおおおおおおおお</li>
+<li>おおおおおおおおおおお</li>
+<li>おおおおおおおおおおお</li>
+</ul>
+</div><!-- /.news__content-items -->
+</div><!-- /.js-display-contents -->
+</div><!-- /.news__content -->
+</div><!-- /.news -->
+
+<h2 class="hdg-a">配信スケジュール</h2>
+<h3 class="hdg-b">配信中</h3>
+<div id="live"></div>
+
+<h3 class="hdg-b">配信予定</h3>
+<div id="js-youtube-root"></div>
+
+<h2 class="hdg-a">メンバー紹介</h2>
+
+<div class="member">
+<div class="member__lists">
+<ul>
+<li class="is-active">
+  <a class="js-tab-hook" href="#member-01">
+    <span class="member__img">
+      <img src="./common/images/img-character-resize-01.png" alt="">
+    </span>
+  </a>
+</li>
+<li>
+  <a class="js-tab-hook" href="#member-02">
+    <span class="member__img">
+      <img src="./common/images/img-character-resize-02.png" alt="">
+    </span>
+  </a>
+</li>
+<li>
+  <a class="js-tab-hook" href="#member-03">
+    <span class="member__img">
+      <img src="./common/images/img-character-resize-03.png" alt="">
+    </span>
+  </a>
+</li>
+<li>
+  <a class="js-tab-hook" href="#member-04">
+    <span class="member__img">
+      <img src="./common/images/img-character-resize-04.png" alt="">
+    </span>
+  </a>
+</li>
+</ul>
+</div><!-- /.member__lists -->
+<div class="member__content">
+<div class="js-display-contents">
+<div id="member-01" class="member__content-items js-tab-item is-active">
+<ul>
+<li>あああああああああああ</li>
+</ul>
+</div><!-- /.member__content-items -->
+<div id="member-02" class="member__content-items js-tab-item">
+<ul>
+<li>いいいいいいいいいいい</li>
+</ul>
+</div><!-- /.member__content-items -->
+<div id="member-03" class="member__content-items js-tab-item">
+<ul>
+<li>ううううううううう</li>
+</ul>
+</div><!-- /.member__content-items -->
+<div id="member-04" class="member__content-items js-tab-item">
+<ul>
+<li>ええええええええええ</li>
+</ul>
+</div><!-- /.member__content-items -->
+</div><!-- /.js-display-contents -->
+</div><!-- /.member__content -->
+</div><!-- /.member -->
+
+<h2 class="hdg-a">二次創作ガイドライン</h2>
+
+<p>説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト</p>
+
+<h2 class="hdg-a">お問い合わせ</h2>
+
+<p class="al-text">VTuberグループ「ANSA」への案件依頼やお問い合わせは下記フォームより、お問い合わせ下さい。</p>
+
 <form name="questionForm" class="js-mail-root" method="post" enctype="text/plain">
 <div class="form-item">
-<p><label for="name">お名前</label></p>
+<p><label for="name">企業名/お名前</label></p>
 <input name="questionFormName" type="text" id="name">
 </div><!-- /.form-item -->
 
@@ -97,9 +245,6 @@ const page = {
 <button id="js-mail-btn">送信</button>
 </form>
 
-<div id="live"></div>
-
-<div id="js-youtube-root"></div>
 
 </div><!-- /.str-contents-wrapper__inner -->
 </main>

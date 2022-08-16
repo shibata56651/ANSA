@@ -14,9 +14,14 @@ body {
   position: relative;
   line-height: 1.6;
   overflow-x: hidden;
+  font-family: $font-family01;
+  font-weight: 400;
+  font-style: normal;
   font-size: 1.6rem;
+  margin: 0;
+  color: $white-color-01;
 
-  @include rwd(bpSp, below) {
+  @include rwd(bpTab, below) {
     font-size: 1.4rem;
   }
 }
@@ -36,6 +41,10 @@ dd,
 button {
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 table {
@@ -90,7 +99,7 @@ button {
 }
 
 .sp-hidden {
-  @include rwd(bpSp, below) {
+  @include rwd(bpTab, below) {
     display: none;
   }
 }
@@ -98,11 +107,11 @@ button {
 .al-center {
   text-align: center;
 
-  @include rwd(bpSp) {
+  @include rwd(bpTab) {
     margin-top: 42px;
   }
 
-  @include rwd(bpSp, below) {
+  @include rwd(bpTab, below) {
     margin-top: 24px;
   }
 }

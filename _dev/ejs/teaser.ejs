@@ -1,0 +1,71 @@
+<%
+/*
+page.type: ガワの種類
+  00: トップページテンプレート
+  01: カテゴリ一覧テンプレート
+  02: ノーマルテンプレート
+  03: ワイドテンプレート
+*/
+
+const root = './'; // ejsフォルダまでの階層に合わせて変更する
+
+const page = {
+  type: 01, // ガワの種類参照
+  sideNavi: false, // サイドナビがある場合、true にする
+  category: 01, // 第二階層（サイドナビに反映）参照
+  title: 'dummyTitle',
+  description: 'xxxxxxx',
+  url: '/', // ルート相対パスで指定する
+  ogp: true, // ogpを入れる場合、true にする
+  ogImg: '/common/images/ogp/ogp-01.png', // opgを反映する場合、相対パスで画像を指定する
+  breadcrumbItem: {
+    two: { // 第2階層
+      name: '特集',
+      path: '/dummy/'
+    },
+    three: { // 第3階
+      name: '第3階層',
+      path: '/dummy/dummy/'
+    },
+    four: { // 第4階層
+      name: '第4階層',
+      path: '/dummy/dummy/dummy/'
+    },
+    five: { // 第5階層
+      name: '第5階層',
+      path: '/dummy/dummy/dummy/dummy/'
+    },
+    current: { // 現在地
+      name: 'カテゴリ'
+    }
+  },
+};
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= page.title %></title>
+<meta name="description" content="<%= page.description %>">
+<%- include('./inc/head') %>
+<script src="https://smtpjs.com/v2/smtp.js"></script>
+<link rel="stylesheet" href="/company/recruit/graduates/common/css/swiper-bundle.css">
+</head>
+
+<body>
+  <%- include('./inc/header') %>
+
+<main class="str-contents-wrapper--teaser">
+<div class="str-contents-wrapper__inner">
+<div class="mv">
+<div class="mv__content">
+<img src="/docs/common/images/img-bg-01.jpg" alt="">
+</div><!-- /.mv__content -->
+</div><!-- /.mv -->
+</div><!-- /.str-contents-wrapper__inner -->
+</main>
+
+<%- include('./inc/footer') %>
+</body>
+</html>

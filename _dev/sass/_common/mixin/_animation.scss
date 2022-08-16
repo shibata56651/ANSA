@@ -1,147 +1,30 @@
-// SPメニューボタン押下時の背景オープンアニメーション
-@keyframes mvAnimation {
+@keyframes spotlightAnimation {
+  0% {
+    transform: rotate(25deg);
+  }
   100% {
-    display: block;
+    transform: rotate(-20deg);
   }
 }
 
-// SPメニューボタン押下時の背景クローズアニメーション
-@keyframes menuCloseAnimation {
+@keyframes loading {
   0% {
-    width: 36px;
-    height: 36px;
-    transform: scale(80);
+    background: radial-gradient(circle, rgba(0, 0, 0, .4), rgba(0, 0, 0, .4) 100px, rgba(0, 0, 0, .4) 100px, rgba(0, 0, 0, .4));
   }
 
   100% {
-    transform: scale(1);
+    background: radial-gradient(circle, transparent, transparent 100px, rgba(0, 0, 0, .4) 100px, rgba(0, 0, 0, .4));
   }
 }
 
-// SPメニューボタン押下時のトグルコンテンツオープンアニメーション
-@keyframes menuFadeInAnimation {
+@keyframes loadingFinish {
   0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
     opacity: 1;
   }
-}
-
-// SPメニューボタン押下時のトグルコンテンツクローズアニメーション
-@keyframes menuCloseFadeInAnimation {
-  0% {
-    transform: translateY(0);
+  40% {
     opacity: 1;
   }
-
-  100% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-}
-
-@keyframes historyExtendLineAnimation {
-  0% {
-    height: 0;
-  }
-
-  100% {
-    height: calc(100% - 80px);
-  }
-}
-
-@keyframes historyFadeInAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// TopMVのオレンジアニメーション
-@keyframes mvCarouselChangeAnimation {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(10);
-  }
-}
-
-// TopMVの画像チェンジアニメーション
-@keyframes mvCarouselAnimation {
-  0% {
-    clip-path: circle(0.0% at 50% 50%);
-    opacity: 1;
-  }
-
-  100% {
-    clip-path: circle(100.0% at 50% 50%);
-    opacity: 1;
-  }
-}
-
-// Topのpick up Services and Solution の回転アニメーション
-@keyframes pickUpAnimation {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-// jsのスライドアニメーション
-@keyframes menuSlideLeftInAnimation {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes menuSlideRightInAnimation {
-  0% {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-// 事業紹介のトグルアニメーション
-@keyframes businessToggleAnimation {
-  0% {
-    display: block;
-    opacity: 1;
-  }
-
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes cardAnimation {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
   }
 }

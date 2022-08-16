@@ -48,7 +48,7 @@ export class tab {
       item.classList.remove(this.activeClass);
     }
 
-    const href = e.target.getAttribute('href').substring(1);
+    const href = this.element.getAttribute('href').substring(1);
     this.tabItem = document.getElementById(href);
 
     this.element.parentNode.classList.add(this.activeClass);

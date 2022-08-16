@@ -1,15 +1,11 @@
 import "./init";
 import { swiper } from './modules/swiper';
-import { topCarousel } from './modules/topCarousel';
 import { fade } from './modules/fade';
 import { SmoothScroll } from './modules/SmoothScroll';
 import { tab } from './modules/tab';
 import { moreShow } from './modules/moreShow';
-import { modal } from './modules/modal';
 import { headertoggle } from './modules/headertoggle';
 import { toggle } from './modules/toggle';
-import { historyAnimation } from './modules/historyAnimation';
-import { paramScroll } from './modules/paramScroll';
 import { jsonGetData } from './modules/jsonGetData';
 import { xmlGetData } from './modules/xmlGetData';
 import { mvAnimation } from './modules/mvAnimation';
@@ -269,7 +265,7 @@ import "scroll-behavior-polyfill";
 
   const tabRoots = doc.querySelectorAll('.js-tab-hook');
 
-  if (tabRoots) {
+  if (tabRoots.length) {
     for (const item of tabRoots) {
       new tab(item, tabRoots);
     }
@@ -288,7 +284,7 @@ import "scroll-behavior-polyfill";
 
   if (targets.length) {
     addEventListener('scroll', () => {
-      if (pageYOffset >= 200) {
+      if (scrollY >= 200) {
         wrapTarget.classList.add('is-animation');
         let i = 0;
 
@@ -299,22 +295,61 @@ import "scroll-behavior-polyfill";
           } else {
             clearInterval(setAnimation);
           }
-        }, 200)
+        }, 200);
       }
     })
   }
 
-  const topCarouselRoot = doc.querySelector('.carousel-mv ul');
+  const loadingRoot = doc.querySelector('.js-loading');
 
-  if (topCarouselRoot) {
-    const cloneFirstElm = topCarouselRoot.querySelectorAll('.js-mv-slide-item')[0].cloneNode(true);
-    cloneFirstElm.classList.remove('first-slide-item');
-    cloneFirstElm.classList.add('slide-item');
-    cloneFirstElm.classList.add('js-last-item');
-    topCarouselRoot.appendChild(cloneFirstElm);
-    const topCarouselTargets = topCarouselRoot.querySelectorAll('.js-mv-slide-item');
-
-    new topCarousel(topCarouselTargets);
+  if (loadingRoot) {
+    win.addEventListener('load', () => {
+      // ローディング画面
+      const images = document.getElementsByTagName('img'); // ページ内のimgタグを取得
+      const loadingGauge = document.querySelector('.js-load-indicator'); // リアルタイムで読み込まれるゲージ部分
+      let imgCounting = 0;
+      let baseCounting = 0;
+      const gaugeWidth = 100; // ゲージの全体幅
+      let current;
+  
+      // 画像の読み込み
+      for (let i = 0; i < images.length; i++) {
+        const img = new Image(); // 新たなimg要素を作成
+        // 画像読み込み完了したとき
+        img.onload = function () {
+          imgCounting += 1;
+        }
+        // 画像読み込み失敗したとき
+        img.onerror = function () {
+          imgCounting += 1;
+        }
+        img.src = images[i].src; // ソースのパスを設定
+      };
+  
+      // setIntervalを使って一定時間ごとに処理を繰り返す
+      const nowLoading = setInterval(() => {
+        if (baseCounting <= imgCounting) {
+          // リアルタイムで読み込んでいるパーセントを取得
+          current = Math.floor(baseCounting / images.length * 100);
+          // リアルタイムで読み込まれるゲージ部分を反映させる
+          loadingGauge.style.width = Math.floor(gaugeWidth / 100 * current) + '%';
+          baseCounting += 1;
+  
+          // 全て読み込んだ時
+          if (baseCounting === images.length) {
+            setTimeout(function () {
+              // ローディング画面全体の非表示
+              loadingRoot.classList.add('is-load');
+              // ローディングの終了
+              clearInterval(nowLoading);
+              const loadedScreen = document.createElement('span');
+              loadedScreen.classList.add('js-screen');
+              document.body.appendChild(loadedScreen);
+            }, 300);
+          }
+        }
+      }, 50);
+    });
   }
 
   const fadeRoots = doc.querySelectorAll('.js-fade-roots');
@@ -330,15 +365,8 @@ import "scroll-behavior-polyfill";
   if (toggleRoots.length) {
     for (const item of toggleRoots) {
       const togglejudge = item.dataset.toggleJudge;
-      new toggle(item, toggleRoots, togglejudge)
+      new toggle(item, toggleRoots, togglejudge);
     }
-  }
-
-  const displayElms = doc.querySelector(`a[href^="#${doc.location.search.substring(1)}"]`);
-
-  const param = doc.location.search;
-  if (param.match('business')) {
-    new paramScroll(param, displayElms);
   }
 
   const cardItems = doc.querySelectorAll('.js-card-animation');
@@ -377,10 +405,10 @@ import "scroll-behavior-polyfill";
       new mvAnimation(animationRoot);
     }
 
-    const youtubeAPIRoot = doc.getElementById('js-youtube-root');
+    // const youtubeAPIRoot = doc.getElementById('js-youtube-root');
 
-    if (youtubeAPIRoot) {
-      new youtubeAPIFunc(youtubeAPIRoot);
-    }
+    // if (youtubeAPIRoot) {
+    //   new youtubeAPIFunc(youtubeAPIRoot);
+    // }
 
 })(window, document);

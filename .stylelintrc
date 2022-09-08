@@ -1,7 +1,7 @@
 {
     "extends": "stylelint-config-standard-scss",
     "rules": {
-        "color-hex-length": "long",
+        "color-hex-length": "short",
         "indentation": 2,
         "number-leading-zero": "never"
     }

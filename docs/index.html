@@ -52,16 +52,19 @@
 </div><!-- /.loading -->
 
 <main class="str-contents-wrapper">
-<span class="spot-light"></span>
+<span class="spot-light">
+<span class="chemical-light"></span>
+<span class="chemical-light"></span>
+</span>
 
 <div class="mv">
 <div class="mv__content">
-<span class="mv__items"><img src="./common/images/img-character-02.png" alt=""></span>
-<span class="mv__items"><img src="./common/images/img-character-01.png" alt=""></span>
+<span class="mv__items mv__items-a"><img src="./common/images/img-character-02.png" alt=""></span>
+<span class="mv__items mv__items-b"><img src="./common/images/img-character-01.png" alt=""></span>
 <span class="mv__items mv__items--logo">
 <h1><img class="icon-logo-a" src="./common/images/logo-02.png" alt="ANSA"></h1></span>
-<span class="mv__items"><img src="./common/images/img-character-03.png" alt=""></span>
-<span class="mv__items"><img src="./common/images/img-character-04.png" alt=""></span>
+<span class="mv__items mv__items-c"><img src="./common/images/img-character-03.png" alt=""></span>
+<span class="mv__items mv__items-d"><img src="./common/images/img-character-04.png" alt=""></span>
 </div><!-- /.mv__content -->
 </div><!-- /.mv -->
 
@@ -71,54 +74,29 @@
 <div class="news">
 <div class="news__lists">
 <ul>
-<li class="is-active"><a class="js-tab-hook" href="#tab-01"><span>赤蕾ライラ</span></a></li>
-<li><a class="js-tab-hook" href="#tab-02"><span>猫屋べー</span></a></li>
-<li><a class="js-tab-hook" href="#tab-03"><span>桜なごみ</span></a></li>
-<li><a class="js-tab-hook" href="#tab-04"><span>甘香ろろぬ</span></a></li>
-<li><a class="js-tab-hook" href="#tab-05"><span>ANSA</span></a></li>
+<li class="is-active"><a class="js-tab-hook-02" href="#tab-01"><span>赤蕾ライラ</span></a></li>
+<li><a class="js-tab-hook-02" href="#tab-02"><span>猫屋べー</span></a></li>
+<li><a class="js-tab-hook-02" href="#tab-03"><span>桜なごみ</span></a></li>
+<li><a class="js-tab-hook-02" href="#tab-04"><span>甘香ろろぬ</span></a></li>
+<li><a class="js-tab-hook-02" href="#tab-05"><span>ANSA</span></a></li>
 </ul>
 </div><!-- /.news__lists -->
 <div class="news__content">
 <div class="js-display-contents">
-<div id="tab-01" class="news__content-items js-tab-item is-active">
-<ul>
-<li>あああああああああああ</li>
-<li>あああああああああああ</li>
-<li>あああああああああああ</li>
-<li>あああああああああああ</li>
-</ul>
+<div id="tab-01" class="news__content-items js-tab-news-items is-active">
+<div class="js-data-content"></div>
 </div><!-- /.news__content-items -->
-<div id="tab-02" class="news__content-items js-tab-item">
-<ul>
-<li>いいいいいいいいいいい</li>
-<li>いいいいいいいいいいい</li>
-<li>いいいいいいいいいいい</li>
-<li>いいいいいいいいいいい</li>
-</ul>
+<div id="tab-02" class="news__content-items js-tab-news-items">
+<div class="js-data-content"></div>
 </div><!-- /.news__content-items -->
-<div id="tab-03" class="news__content-items js-tab-item">
-<ul>
-<li>ううううううううう</li>
-<li>ううううううううう</li>
-<li>ううううううううう</li>
-<li>ううううううううう</li>
-</ul>
+<div id="tab-03" class="news__content-items js-tab-news-items">
+<div class="js-data-content"></div>
 </div><!-- /.news__content-items -->
-<div id="tab-04" class="news__content-items js-tab-item">
-<ul>
-<li>ええええええええええ</li>
-<li>ええええええええええ</li>
-<li>ええええええええええ</li>
-<li>ええええええええええ</li>
-</ul>
+<div id="tab-04" class="news__content-items js-tab-news-items">
+<div class="js-data-content"></div>
 </div><!-- /.news__content-items -->
-<div id="tab-05" class="news__content-items js-tab-item">
-<ul>
-<li>おおおおおおおおおおお</li>
-<li>おおおおおおおおおおお</li>
-<li>おおおおおおおおおおお</li>
-<li>おおおおおおおおおおお</li>
-</ul>
+<div id="tab-05" class="news__content-items js-tab-news-items">
+<div class="js-data-content"></div>
 </div><!-- /.news__content-items -->
 </div><!-- /.js-display-contents -->
 </div><!-- /.news__content -->
@@ -126,10 +104,10 @@
 
 <h2 class="hdg-a">配信スケジュール</h2>
 <h3 class="hdg-b">配信中</h3>
-<div id="live"></div>
+<div id="js-youtube-root"></div>
 
 <h3 class="hdg-b">配信予定</h3>
-<div id="js-youtube-root"></div>
+<div id="live"></div>
 
 <h2 class="hdg-a">メンバー紹介</h2>
 
@@ -137,56 +115,400 @@
 <div class="member__lists">
 <ul>
 <li class="is-active">
-  <a class="js-tab-hook" href="#member-01">
-    <span class="member__img">
-      <img src="./common/images/img-character-resize-01.png" alt="">
-    </span>
-  </a>
+<a class="js-tab-hook" href="#member-01">
+<span class="member__img">
+<img src="./common/images/img-character-resize-01.png" alt="">
+</span>
+</a>
 </li>
 <li>
-  <a class="js-tab-hook" href="#member-02">
-    <span class="member__img">
-      <img src="./common/images/img-character-resize-02.png" alt="">
-    </span>
-  </a>
+<a class="js-tab-hook" href="#member-02">
+<span class="member__img">
+<img src="./common/images/img-character-resize-02.png" alt="">
+</span>
+</a>
 </li>
 <li>
-  <a class="js-tab-hook" href="#member-03">
-    <span class="member__img">
-      <img src="./common/images/img-character-resize-03.png" alt="">
-    </span>
-  </a>
+<a class="js-tab-hook" href="#member-03">
+<span class="member__img">
+<img src="./common/images/img-character-resize-03.png" alt="">
+</span>
+</a>
 </li>
 <li>
-  <a class="js-tab-hook" href="#member-04">
-    <span class="member__img">
-      <img src="./common/images/img-character-resize-04.png" alt="">
-    </span>
-  </a>
+<a class="js-tab-hook" href="#member-04">
+<span class="member__img">
+<img src="./common/images/img-character-resize-04.png" alt="">
+</span>
+</a>
 </li>
 </ul>
 </div><!-- /.member__lists -->
 <div class="member__content">
 <div class="js-display-contents">
-<div id="member-01" class="member__content-items js-tab-item is-active">
+<div id="member-01" class="member__content-items js-tab-member-items is-active">
+<div class="member__contents">
+<div class="member__items member__items--logo">
+<div class="member__logo">
+<img src="./common/images/logo-03.png" alt="">
+</div><!-- /.member__logo -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--tags">
+<div class="member__tag-list">
+<dl>
+<dt>ファンネーム</dt>
+<dd>なし</dd>
+<dt>ファンアートタグ</dt>
+<dd>#ライラあーと</dd>
+<dt>総合・配信タグ</dt>
+<dd>#ライらいぶ</dd>
+<dt>配信マーク</dt>
+<dd>🌹</dd>
+</dl>
+</div><!-- /.member__tag-list -->
+<div class="member__sns-list">
 <ul>
-<li>あああああああああああ</li>
+<li><a target="_blank" href="https://www.youtube.com/channel/UCqKexNL7YoueTlGSNZXoqPQ"><img src="./common/images/sns/sns-logo-01.png" alt=""></a></li>
+<li><a target="_blank" href="https://twitter.com/Arai_Raira"><img src="./common/images/sns/sns-logo-02.png" alt=""></a></li>
+<li><a target="_blank" href="https://t.co/c6GLuA2clj"><img src="./common/images/sns/sns-logo-03.png" alt=""></a></li>
+<li><a target="_blank" href="https://arairaira.fanbox.cc/"><img src="./common/images/sns/sns-logo-05.png" alt=""></a></li>
+<li><a target="_blank" href="https://rairarara.booth.pm/"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
+<li><a target="_blank" href="https://rairarara.booth.pm/"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
 </ul>
+</div><!-- /.member__sns-list -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--visual">
+<img src="./common/images/img-character-02.png" alt="">
+</div><!-- /.member__items -->
+</div><!-- /.member__contents -->
+
+<h3 class="hdg-c">配信で使用する単語</h3>
+<div class="member__word-list">
+<ul>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+</ul>
+</div><!-- /.member__word-list -->
 </div><!-- /.member__content-items -->
-<div id="member-02" class="member__content-items js-tab-item">
+<div id="member-02" class="member__content-items js-tab-member-items">
+<div class="member__contents">
+<div class="member__items member__items--logo">
+<div class="member__logo">
+<img src="./common/images/logo-04.png" alt="">
+</div><!-- /.member__logo -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--tags">
+<div class="member__tag-list">
+<dl>
+<dt>ファンネーム</dt>
+<dd>九生国民</dd>
+<dt>ファンアートタグ</dt>
+<dd>#猫屋家肖像画 </dd>
+<dt>総合・配信タグ</dt>
+<dd>#九生国民</dd>
+<dt>配信マーク</dt>
+<dd>😽👅</dd>
+</dl>
+</div><!-- /.member__tag-list -->
+<div class="member__sns-list">
 <ul>
-<li>いいいいいいいいいいい</li>
+<li><a target="_blank" href="https://www.youtube.com/c/nekoyabe"><img src="./common/images/sns/sns-logo-01.png" alt=""></a></li>
+<li><a target="_blank" href="https://twitter.com/nekoya_be"><img src="./common/images/sns/sns-logo-02.png" alt=""></a></li>
+<li><a target="_blank" href="https://t.co/pdWrVX55HA"><img src="./common/images/sns/sns-logo-03.png" alt=""></a></li>
+<li><a target="_blank" href="https://twitcasting.tv/nekoya_be"><img src="./common/images/sns/sns-logo-04.png" alt=""></a></li>
+<li><a target="_blank" href="https://nekoyabe.booth.pm/"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
+<li><a target="_blank" href="https://nekoyabe.booth.pm/"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
+<li><a target="_blank" href="https://nekoyabe.booth.pm/"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
 </ul>
+</div><!-- /.member__sns-list -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--visual">
+<img src="./common/images/img-character-01.png" alt="">
+</div><!-- /.member__items -->
+</div><!-- /.member__contents -->
+
+<h3 class="hdg-c">配信で使用する単語</h3>
+<div class="member__word-list">
+<ul>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+</ul>
+</div><!-- /.member__word-list -->
 </div><!-- /.member__content-items -->
-<div id="member-03" class="member__content-items js-tab-item">
+<div id="member-03" class="member__content-items js-tab-member-items">
+<div class="member__contents">
+<div class="member__items member__items--logo">
+<div class="member__logo">
+<img src="./common/images/logo-05.png" alt="桜なごみ">
+</div><!-- /.member__logo -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--tags">
+<div class="member__tag-list">
+<dl>
+<dt>ファンネーム</dt>
+<dd>なご民 桜なごみ</dd>
+<dt>ファンアートタグ</dt>
+<dd>#なごみのマジックstudio</dd>
+<dt>総合・配信タグ</dt>
+<dd>#桜魔ヶ時</dd>
+<dt>切り抜きタグ</dt>
+<dd>#なごみの切り抜き魔法</dd>
+<dt>配信マーク</dt>
+<dd>💮✡️</dd>
+</dl>
+</div><!-- /.member__tag-list -->
+<div class="member__sns-list">
 <ul>
-<li>ううううううううう</li>
+<li><a target="_blank" href="https://x.gd/gU5IC"><img src="./common/images/sns/sns-logo-01.png" alt=""></a></li>
+<li><a target="_blank" href="https://twitter.com/sakura_n753"><img src="./common/images/sns/sns-logo-02.png" alt=""></a></li>
+<li><a target="_blank" href="https://bit.ly/3051H8u"><img src="./common/images/sns/sns-logo-03.png" alt=""></a></li>
+<li><a target="_blank" href="https://bit.ly/3mSmm88"><img src="./common/images/sns/sns-logo-05.png" alt=""></a></li>
+<li><a target="_blank" href="https://bit.ly/3bMKS4l"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
+<li><a target="_blank" href="https://bit.ly/3bMKS4l"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
+<li><a target="_blank" href="https://bit.ly/3bMKS4l"><img src="./common/images/sns/sns-logo-06.png" alt=""></a></li>
 </ul>
+</div><!-- /.member__sns-list -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--visual">
+<img src="./common/images/img-character-03.png" alt="">
+</div><!-- /.member__items -->
+</div><!-- /.member__contents -->
+
+<h3 class="hdg-c">配信で使用する単語</h3>
+<div class="member__word-list">
+<ul>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+</ul>
+</div><!-- /.member__word-list -->
 </div><!-- /.member__content-items -->
-<div id="member-04" class="member__content-items js-tab-item">
+<div id="member-04" class="member__content-items js-tab-member-items">
+<div class="member__contents">
+<div class="member__items member__items--logo">
+<div class="member__logo">
+<img src="./common/images/logo-06.png" alt="">
+</div><!-- /.member__logo -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--tags">
+<div class="member__tag-list">
+<dl>
+<dt>ファンネーム</dt>
+<dd>ろろめいと</dd>
+<dt>ファンアートタグ</dt>
+<dd>#でころろぬ</dd>
+<dt>総合・配信タグ</dt>
+<dd>#ろろぬのお茶会　#甘香ろろぬ</dd>
+<dt>切り抜きタグ</dt>
+<dd>#あまかっと</dd>
+<dt>配信マーク</dt>
+<dd>🍒🎀</dd>
+</dl>
+</div><!-- /.member__tag-list -->
+<div class="member__sns-list">
 <ul>
-<li>ええええええええええ</li>
+<li><a target="_blank" href="https://bit.ly/3jdcJOy"><img src="./common/images/sns/sns-logo-01.png" alt="YouTube"></a></li>
+<li><a target="_blank" href="__dummy__"><img src="./common/images/sns/sns-logo-02.png" alt="Twitter"></a></li>
+<li><a target="_blank" href="https://bit.ly/2WQFskR"><img src="./common/images/sns/sns-logo-03.png" alt="マシュマロ"></a></li>
+<li><a target="_blank" href="https://bit.ly/3NxMwaw"><img src="./common/images/sns/sns-logo-06.png" alt="Booth"></a></li>
 </ul>
+</div><!-- /.member__sns-list -->
+</div><!-- /.member__items -->
+<div class="member__items member__items--visual">
+<img src="./common/images/img-character-04.png" alt="">
+</div><!-- /.member__items -->
+</div><!-- /.member__contents -->
+
+<h3 class="hdg-c">配信で使用する単語</h3>
+<div class="member__word-list">
+<ul>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+<li>
+<div class="member__word-items">
+<dl>
+<dt>○○○○○</dt>
+<dd>使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト使用テキスト</dd>
+</dl>
+</div><!-- /.member__word-items -->
+</li>
+</ul>
+</div><!-- /.member__word-list -->
 </div><!-- /.member__content-items -->
 </div><!-- /.js-display-contents -->
 </div><!-- /.member__content -->
@@ -198,25 +520,20 @@
 
 <h2 class="hdg-a">お問い合わせ</h2>
 
-<p class="al-text">VTuberグループ「ANSA」への案件依頼やお問い合わせは下記フォームより、お問い合わせ下さい。</p>
+<p class="al-center">VTuberグループ「ANSA」への案件依頼やお問い合わせは下記フォームより、お問い合わせ下さい。</p>
 
-<form name="questionForm" class="js-mail-root" method="post" enctype="text/plain">
-<div class="form-item">
+<form name="questionForm" class="mail__root" method="post" enctype="text/plain">
+<div class="form__item">
 <p><label for="name">企業名/お名前</label></p>
 <input name="questionFormName" type="text" id="name">
 </div><!-- /.form-item -->
 
-<div class="form-item">
-<p><label for="address">メールアドレス</label></p>
-<input name="questionFormEmail" type="email" id="address">
-</div><!-- /.form-item -->
-
-<div class="form-item">
+<div class="form__item">
 <p><label for="contact">問い合わせ内容</label></p>
 <textarea name="questionFormContact" id="contact" cols="30" rows="10"></textarea>
 </div><!-- /.form-item -->
 
-<button id="js-mail-btn">送信</button>
+<button class="mail__btn">送信</button>
 </form>
 
 

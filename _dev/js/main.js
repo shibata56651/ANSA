@@ -264,10 +264,20 @@ import "scroll-behavior-polyfill";
   }
 
   const tabRoots = doc.querySelectorAll('.js-tab-hook');
+  const tabRoots2 = doc.querySelectorAll('.js-tab-hook-02');
+  let displayTarget = null;
 
   if (tabRoots.length) {
+    displayTarget = 'js-tab-news-items';
     for (const item of tabRoots) {
-      new tab(item, tabRoots);
+      new tab(item, tabRoots, displayTarget);
+    }
+  }
+
+  if (tabRoots2.length) {
+    displayTarget = 'js-tab-member-items';
+    for (const item of tabRoots2) {
+      new tab(item, tabRoots2, displayTarget);
     }
   }
 
@@ -334,9 +344,8 @@ import "scroll-behavior-polyfill";
           // リアルタイムで読み込まれるゲージ部分を反映させる
           loadingGauge.style.width = Math.floor(gaugeWidth / 100 * current) + '%';
           baseCounting += 1;
-  
           // 全て読み込んだ時
-          if (baseCounting === images.length) {
+          if (baseCounting === images.length - 20) {
             setTimeout(function () {
               // ローディング画面全体の非表示
               loadingRoot.classList.add('is-load');
@@ -392,10 +401,15 @@ import "scroll-behavior-polyfill";
     new jsonGetData(jsonRoots);
   }
 
-  const xmlRoots = doc.getElementById('xml-area');
+  const xmlRoots = doc.querySelectorAll('.js-data-content');
 
-  if (xmlRoots) {
-    new xmlGetData(xmlRoots);
+  if (xmlRoots.length) {
+    let num = 0;
+
+    for (const item of xmlRoots) {
+      num += 1;
+      new xmlGetData(item, num);
+    }
   }
 
     // アンカーリンク
@@ -405,10 +419,11 @@ import "scroll-behavior-polyfill";
       new mvAnimation(animationRoot);
     }
 
-    // const youtubeAPIRoot = doc.getElementById('js-youtube-root');
+    const youtubeAPIRoot = doc.getElementById('js-youtube-root');
+    const youtubeAPIRootLive = doc.getElementById('live');
 
-    // if (youtubeAPIRoot) {
-    //   new youtubeAPIFunc(youtubeAPIRoot);
-    // }
+    if (youtubeAPIRoot) {
+      new youtubeAPIFunc(youtubeAPIRoot, youtubeAPIRootLive);
+    }
 
 })(window, document);

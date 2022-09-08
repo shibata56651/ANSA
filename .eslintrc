@@ -1,6 +1,13 @@
 {
-    "extends": [
-        "./node_modules/@mitsue/eslint-config-es5/index.js"
-    ],
-    "root": true
+    "extends": ["@mitsue", "plugin:@typescript-eslint/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "multiline-comment-style": 0,
+        "lines-between-class-members":  [2, "always", { "exceptAfterSingleLine": true }],
+        "require-unicode-regexp": 0
+    }
 }

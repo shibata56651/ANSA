@@ -1,51 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
 	<item>
+		<id>1</id>
+		<lastmod>2022/07/06</lastmod>
 		<loc>https://test.com/</loc>
-		<lastmod>2020-11-06</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>1.0</priority>
+		<text>ライラテキスト1ライラテキスト1ライラテキスト1ライラテキスト1ライラテキスト1</text>
 	</item>
 
 	<item>
+	<id>1</id>
+		<lastmod>2022/07/06</lastmod>
 		<loc>https://test.com/blog/</loc>
-		<lastmod>2020-10-16</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<text>ライラテキスト2ライラテキスト2ライラテキスト2ライラテキスト2ライラテキスト2</text>
 	</item>
 
   <item>
+		<id>2</id>
+    <lastmod>2022/07/06</lastmod>
     <loc>https://test.com/blog/trip/</loc>
-    <lastmod>2019-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+		<text>べーテキスト1べーテキスト1べーテキスト1べーテキスト1べーテキスト1べーテキスト1</text>
   </item>
 
   <item>
+		<id>2</id>
+    <lastmod>2022/07/06</lastmod>
     <loc>https://test.com/blog/trip/alaska-report/</loc>
-    <lastmod>2019-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+		<text>べーテキスト2べーテキスト2べーテキスト2べーテキスト2べーテキスト2べーテキスト2べーテキスト2</text>
   </item>
 
   <item>
+		<id>3</id>
+    <lastmod>2022/07/06</lastmod>
     <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
-    <lastmod>2019-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+		<text>なごみテキスト1なごみテキスト1なごみテキスト1なごみテキスト1なごみテキスト1なごみテキスト1</text>
+  </item>
+
+  <item>
+		<id>3</id>
+    <lastmod>2022/07/06</lastmod>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+		<text>なごみテキスト2なごみテキスト2なごみテキスト2なごみテキスト2なごみテキスト2なごみテキスト2</text>
+  </item>
+
+  <item>
+	<id>4</id>
+    <lastmod>2022/07/06</lastmod>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+		<text>ろろぬテキスト1ろろぬテキスト1ろろぬテキスト1ろろぬテキスト1ろろぬテキスト1ろろぬテキスト1</text>
   </item>
 
 	<item>
-		<loc>https://test.com/about/</loc>
-		<lastmod>2019-06-10</lastmod>
-		<changefreq>yearly</changefreq>
-		<priority>0.8</priority>
-	</item>
+	<id>4</id>
+    <lastmod>2022/07/06</lastmod>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+		<text>ろろぬテキスト2ろろぬテキスト2ろろぬテキスト2ろろぬテキスト2ろろぬテキスト2ろろぬテキスト2</text>
+  </item>
 
 	<item>
-		<loc>https://test.com/contact/</loc>
-		<lastmod>2019-06-10</lastmod>
-		<changefreq>yearly</changefreq>
-		<priority>0.8</priority>
+	<id>5</id>
+    <lastmod>2022/07/06</lastmod>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+		<text>グループ全体テキスト1グループ全体テキスト1グループ全体テキスト1グループ全体テキスト1グループ全体テキスト1グループ全体テキスト1</text>
+  </item>
+
+		<item>
+	<id>5</id>
+    <lastmod>2022/07/06</lastmod>
+    <loc>https://test.com/blog/trip/different-rate-in-thailand/</loc>
+		<text>グループ全体テキスト2グループ全体テキスト2グループ全体テキスト2グループ全体テキスト2グループ全体テキスト2グループ全体テキスト2</text>
   </item>
 </data>

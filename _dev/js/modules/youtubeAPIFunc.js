@@ -1,147 +1,246 @@
-// export class youtubeAPIFunc {
-//   /**
-//    * @param  {Element} elements rootとなる要素
-//    * @returns void
-//    */
-//   constructor(elements = {}) {
-//     const defaultOptions = {
-//       activeClass: 'is-active',
-//       CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
-//       CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
-//       CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
-//       CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
-//       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
-//       ID: '',
-//       LIVESTATUS: '',
-//       statusFlg: false,
-//     };
+export class youtubeAPIFunc {
+  /**
+   * @param  {Element} elements rootとなる要素
+   * @returns void
+   */
+  constructor(elements, liveElements = {}) {
+    const defaultOptions = {
+      activeClass: 'is-active',
+      CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
+      CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
+      CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
+      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
+      CHANNEL_ID_05: 'UC1CiTzTMaRQUIPdSkvSt29g',
+      APIKEY: 'AIzaSyDpGvB-IA0WgEVBYrMdW-dl8zm4emzLYwE',
+      ID: '',
+      LIVESTATUS: '',
+      statusFlg: false,
+    };
 
-//     this.o = Object.assign(defaultOptions);
-//     this.elements = elements;
-//     this.liveElm = document.getElementById('live');
-//     this.init();
-//   }
-//   /**
-//    * 初期化処理
-//    *
-//    * @returns void
-//    */
-//   init() {
-//     window.addEventListener('load', this.onJSClientLoad.bind(this));
-//   }
+    this.o = Object.assign(defaultOptions);
+    this.elements = elements;
+    this.liveElm = liveElements;
+    this.elmCount = 0;
+    this.liveRoot = document.createElement('ul'); //配信中ul
+    this.liveRoot.classList.add('temporary-element');
+    this.elements.appendChild(this.liveRoot);
 
-//   /**
-//    * ページロード時にスライドショーを再生する
-//    *
-//    * @returns void
-//    */
+    this.reservationRoot = document.createElement('ul'); //予約ul
+    this.reservationRoot.classList.add('temporary-element');
+    this.liveElm.appendChild(this.reservationRoot);
+    this.init();
+  }
+  /**
+   * 初期化処理
+   *
+   * @returns void
+   */
+  init() {
+    window.addEventListener('load', this.onJSClientLoad.bind(this));
+  }
 
-//   /* APIロード */
-//   onJSClientLoad() {
-// const getYouTube = async (api, query, cooldown = 300) => {
-//   await new Promise((r) => setTimeout(r, cooldown));
-//   return await (
-//     await fetch(`https://www.googleapis.com/youtube/v3/${api}${Object.entries(query).reduce((p, [k, v]) => `${p}&${k}=${v}`, `?key=${this.o.APIKEY}`)}`)
-//   ).json();
-// };
+  /**
+   * ページロード時にスライドショーを再生する
+   *
+   * @returns void
+   */
 
-// const getVideos = async (channelId) => {
-//   const playlistId = (
-//     await getYouTube("channels", {
-//       part: "contentDetails",
-//       id: channelId,
-//     })
-//   ).items[0].contentDetails.relatedPlaylists.uploads;
+  /* APIロード */
+  onJSClientLoad() {
+    const getYouTube = async (api, query, cooldown = 300) => {
+      await new Promise((r) => setTimeout(r, cooldown));
+      return await (
+        await fetch(`https://www.googleapis.com/youtube/v3/${api}${Object.entries(query).reduce((p, [k, v]) => `${p}&${k}=${v}`, `?key=${this.o.APIKEY}`)}`)
+      ).json();
+    };
 
-//   switch (channelId) {
-//     case this.o.CHANNEL_ID_01:
-//       break;
+    const getVideos = async (channelId) => {
+      const playlistId = (
+        await getYouTube("channels", {
+          part: "contentDetails",
+          id: channelId,
+        })
+      ).items[0].contentDetails.relatedPlaylists.uploads;
 
-//       case this.o.CHANNEL_ID_02:
-//         break;
+      switch (channelId) {
+        case this.o.CHANNEL_ID_01:
+          break;
 
-//       case this.o.CHANNEL_ID_03:
-//       break;
+        case this.o.CHANNEL_ID_02:
+          break;
 
-//       case this.o.CHANNEL_ID_04:
-//       break;
-//   }
+        case this.o.CHANNEL_ID_03:
+          break;
 
-//   return await getYouTube("playlistItems", {
-//     part: "snippet",
-//     maxResults: 50,
-//     playlistId,
-//   })
-// };
+        case this.o.CHANNEL_ID_04:
+          break;
 
-// const liveStatusFunc = (resolveItem, i) => {
-//   return getYouTube("videos", {
-//     part: "snippet",
-//     id: resolveItem.items[i].snippet.resourceId.videoId,
-//   })
-// }
+        case this.o.CHANNEL_ID_05:
+          break;
+      }
 
-// const liveFunc = (resolveItem, i) => {
-//   return getYouTube("videos", {
-//     part: "liveStreamingDetails",
-//     id: resolveItem.items[i].snippet.resourceId.videoId,
-//   })
-// }
+      return await getYouTube("playlistItems", {
+        part: "snippet",
+        maxResults: 5,
+        playlistId,
+      })
+    };
 
-// const liveStatus = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
-//   // console.log(resolveItem.items[0])
+    const liveStatusFunc = (resolveItem, i) => {
+      return getYouTube("videos", {
+        part: "snippet",
+        id: resolveItem.items[i].snippet.resourceId.videoId,
+      })
+    }
 
-//   if (resolveItem.items[0].snippet) {
-//     if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
-//       this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
-//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
-//       this.o.LIVESTATUS = `<span class="live-status--live">LIVE</span>`;
-//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
-//       this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
-//     }
+    const liveFunc = (resolveItem, i) => {
+      return getYouTube("videos", {
+        part: "liveStreamingDetails",
+        id: resolveItem.items[i].snippet.resourceId.videoId,
+      })
+    }
 
-//     moviecontent.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
-//     <div class="items__text">${resolveItem.items[0].snippet.title}</div>
-//     ${this.o.LIVESTATUS}
-//     </div>`;
-//   }
-// }
+    const liveStatus = (resolveItem, rootitems, i, detailcontent, livecontent, rootitemsLive) => {
 
-// const liveDetailsFunc = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
-//   detailcontent.innerHTML = `<div class="items"><p class="scheduled">${resolveItem.items[0].liveStreamingDetails.scheduledStartTime}</p></div>`
+      if (resolveItem.items[0].snippet) {
+        if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
+          this.elmCount += 1;
+          this.reservationRoot.appendChild(rootitems);
+          const movieRoot = document.createElement('div');
+          movieRoot.classList.add('movie-content');
+          rootitems.appendChild(movieRoot);
+          rootitems.appendChild(detailcontent);
 
-//   // console.log("livestreaming："+resolveItem.items[0]);
-// };
+          if (this.elmCount === 1) {
+            this.reservationRoot.classList.add('movie-list');
+            this.reservationRoot.classList.add('movie-list--col1');
+          } else if (this.elmCount === 2) {
+            this.reservationRoot.classList.add('movie-list');
+            this.reservationRoot.classList.remove('movie-list--col1');
+            this.reservationRoot.classList.add('movie-list--col2');
+          } else if (this.elmCount === 3) {
+            this.reservationRoot.classList.add('movie-list');
+            this.reservationRoot.classList.remove('movie-list--col2');
+            this.reservationRoot.classList.add('movie-list--col3');
+          } else if (this.elmCount === 4) {
+            this.reservationRoot.classList.add('movie-list');
+            this.reservationRoot.classList.remove('movie-list--col3');
+            this.reservationRoot.classList.add('movie-list--col4');
+          }
 
-// const resolveFunc = (resolveItem) => {
-//   const root = document.createElement('ul');
-//   this.elements.appendChild(root);
+          movieRoot.innerHTML = `<div class="movie-content__items-img">
+          <a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}">
+          <img src="${resolveItem.items[0].snippet.thumbnails.maxres.url}">
+          </a>
+          </div>
+        <p class="movie-content__items-channel">${resolveItem.items[0].snippet.channelTitle}</p>
+        <p class="movie-content__items-text">${resolveItem.items[0].snippet.title}</p>`;
+        } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
+          this.elmCount += 1;
+          this.liveRoot.appendChild(rootitems);
+          const liveRoot = document.createElement('div');
+          livecontent.classList.add('movie-content__items');
+          rootitems.appendChild(liveRoot);
+          liveRoot.appendChild(detailcontent);
 
-//   for (let i=0;i <15; i++) {
-//     const rootitems = document.createElement('li');
-//     const moviecontent = document.createElement('div');
-//     moviecontent.classList.add('movie-content');
-//     const detailcontent = document.createElement('div');
-//     detailcontent.classList.add('details-content');
-//     root.appendChild(rootitems);
-//     rootitems.appendChild(moviecontent);
-//     rootitems.appendChild(detailcontent);
+          if (this.elmCount === 1) {
+            this.liveRoot.classList.add('movie-list');
+            this.liveRoot.classList.add('movie-list--col1');
+          } else if (this.elmCount === 2) {
+            this.liveRoot.classList.add('movie-list');
+            this.liveRoot.classList.remove('movie-list--col1');
+            this.liveRoot.classList.add('movie-list--col2');
+          } else if (this.elmCount === 3) {
+            this.liveRoot.classList.add('movie-list');
+            this.liveRoot.classList.remove('movie-list--col2');
+            this.liveRoot.classList.add('movie-list--col3');
+          } else if (this.elmCount === 4) {
+            this.liveRoot.classList.add('movie-list');
+            this.liveRoot.classList.remove('movie-list--col3');
+            this.liveRoot.classList.add('movie-list--col4');
+          }
 
-//     liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems, i, moviecontent, detailcontent));
-//     liveFunc(resolveItem, i).then(r => liveDetailsFunc(r, rootitems, i, moviecontent, detailcontent));
-//   }
-// }
+          liveRoot.innerHTML = `<div class="live-content__items-img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img src="${resolveItem.items[0].snippet.thumbnails.maxres.url}"></a></div>
+      <p class="live-content__items-channel">${resolveItem.items[0].snippet.channelTitle}</p>
+      <p class="live-content__items-text">${resolveItem.items[0].snippet.title}</p>`;
+        }
 
-// // べー
-// getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
+        // console.log(root)
+      }
+    }
 
-// // ライラさん
-// getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
+    const liveDetailsFunc = (resolveItem, rootitems, i, detailcontent) => {
+      const normalizeDateArry = resolveItem.items[0].liveStreamingDetails.scheduledStartTime.split('T');
 
-// // なごみさん
-// getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r));
+      let normalizeDate = normalizeDateArry[0].split('-').join('/');
+      let hour = Number(normalizeDateArry[1].split(':')[0]);
+      let minit = Number(normalizeDateArry[1].split(':')[1]);
+      const today = new Date();
+      const year = String(today.getFullYear());
+      const nowHour = String(today.getHours());
+      const nowMinit = String(today.getMinutes());
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
 
-// // ろろぬさん
-// getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r));
-//   }
-// }
+      if ((today.getMonth() + 1) <= 10) {
+        month = String('0' + month);
+      } else {
+        month = String(month);
+      }
+
+      if (day <= 10) {
+        day = String('0' + day);
+      } else {
+        day = String(day);
+      }
+
+      const sum = year + month + day + nowHour + nowMinit;
+      Number(sum)
+      hour = hour + 9;
+
+      String(hour);
+
+      if (minit === 0) {
+        minit = '00';
+      }
+
+      String(minit);
+
+      const liveTime = String(normalizeDateArry[0].split('-').join('')) + hour + minit;
+
+      if (sum <= liveTime) {
+        detailcontent.innerHTML = `<span class="details-content__items-scheduled-date">${normalizeDate}</span><span class="details-content__items-scheduled-time">${hour}:${minit}</span>`;
+      }
+    };
+
+    const resolveFunc = (resolveItem) => {
+      this.elmCount = 0;
+      for (let i = 0; i < 10; i++) {
+        const rootitems = document.createElement('li');
+        const rootitemsLive = document.createElement('li');
+        const livecontent = document.createElement('div');
+        livecontent.classList.add('live-content');
+        const detailcontent = document.createElement('p');
+        detailcontent.classList.add('details-content');
+
+        liveFunc(resolveItem, i).then(r => liveDetailsFunc(r, rootitems, i, detailcontent));
+        liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems, i, detailcontent, rootitemsLive));
+      }
+    }
+
+    // べー
+    getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
+
+    // ライラさん
+    getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
+
+    // なごみさん
+    getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r));
+
+    // ろろぬさん
+    getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r));
+
+    // ANSA公式
+    getVideos(this.o.CHANNEL_ID_05).then(r => resolveFunc(r));
+  }
+}

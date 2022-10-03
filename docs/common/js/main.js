@@ -10094,28 +10094,23 @@ var tab = /*#__PURE__*/function () {
    * @param  {Element} element rootとなる要素
    * @returns void
    */
-  function tab(element) {
-    var _this = this;
-
-    var roots = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  function tab(element, roots) {
+    var displayTarget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     _classCallCheck(this, tab);
 
     var defaultOptions = {
       activeClass: 'is-active',
-      tabItem: 'js-tab-item'
+      tabItem: displayTarget
     };
     this.o = Object.assign(defaultOptions);
     this.element = element;
     this.roots = roots;
     this.tabItem = null;
-    this.displayItem = document.querySelectorAll(".".concat(this.o.tabItem));
+    this.displayItem = null;
     this.content = document.getElementById(this.element.hash.substring(1));
     this.activeClass = this.o.activeClass;
     this.init();
-    window.addEventListener('load', function () {
-      _this.loadHandler();
-    });
   }
   /**
    * 初期化処理
@@ -10138,6 +10133,12 @@ var tab = /*#__PURE__*/function () {
     key: "clickHandler",
     value: function clickHandler(e) {
       e.preventDefault();
+
+      if (this.element.classList.contains('js-tab-hook-02')) {
+        this.displayItem = document.querySelectorAll(".js-tab-news-items");
+      } else if (this.element.classList.contains('js-tab-hook')) {
+        this.displayItem = document.querySelectorAll(".js-tab-member-items");
+      }
 
       var _iterator = _createForOfIteratorHelper(this.roots),
           _step;
@@ -10172,78 +10173,6 @@ var tab = /*#__PURE__*/function () {
       this.tabItem = document.getElementById(href);
       this.element.parentNode.classList.add(this.activeClass);
       this.content.classList.add(this.activeClass);
-    }
-  }, {
-    key: "loadHandler",
-    value: function loadHandler() {
-      var param = location.search.substring(1);
-      var hooks = document.querySelectorAll('.js-tab-hook');
-      var hookItems = document.querySelectorAll('.js-tab-item');
-
-      if (param.indexOf('tab') === 0) {
-        var _iterator3 = _createForOfIteratorHelper(this.roots),
-            _step3;
-
-        try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var item = _step3.value;
-            item.parentNode.classList.remove(this.activeClass);
-          }
-        } catch (err) {
-          _iterator3.e(err);
-        } finally {
-          _iterator3.f();
-        }
-
-        var _iterator4 = _createForOfIteratorHelper(this.displayItem),
-            _step4;
-
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var _item2 = _step4.value;
-
-            _item2.classList.remove(this.activeClass);
-          }
-        } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
-        }
-      }
-
-      var _iterator5 = _createForOfIteratorHelper(hooks),
-          _step5;
-
-      try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var hook = _step5.value;
-
-          if (hook.getAttribute('href') === "#".concat(param)) {
-            hook.parentNode.classList.add(this.activeClass);
-          }
-        }
-      } catch (err) {
-        _iterator5.e(err);
-      } finally {
-        _iterator5.f();
-      }
-
-      var _iterator6 = _createForOfIteratorHelper(hookItems),
-          _step6;
-
-      try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var hookItem = _step6.value;
-
-          if (hookItem.getAttribute('id') === "".concat(param)) {
-            hookItem.classList.add(this.activeClass);
-          }
-        }
-      } catch (err) {
-        _iterator6.e(err);
-      } finally {
-        _iterator6.f();
-      }
     }
   }]);
 
@@ -10470,8 +10399,8 @@ var xmlGetData = /*#__PURE__*/function () {
    * @param  {Element} elements rootとなる要素
    * @returns void
    */
-  function xmlGetData() {
-    var elements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  function xmlGetData(elements) {
+    var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     _classCallCheck(this, xmlGetData);
 
@@ -10483,7 +10412,7 @@ var xmlGetData = /*#__PURE__*/function () {
     };
     this.o = Object.assign(defaultOptions);
     this.elements = elements;
-    this.carouselBtn = document.querySelector('.js-carousel-mv-btn');
+    this.count = num;
     this.timer;
     this.init();
   }
@@ -10527,15 +10456,20 @@ var xmlGetData = /*#__PURE__*/function () {
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var _data = _step.value;
-            var li_element = document.createElement('li');
 
-            var url = _data.querySelector('loc');
+            var id = _data.querySelector('id');
 
-            var last_update = _data.querySelector('lastmod');
+            if (_this.count === Number(id.textContent)) {
+              var li_element = document.createElement('li');
 
-            li_element.innerHTML = "URL\uFF1A".concat(url.textContent, "<br>\u6700\u7D42\u66F4\u65B0\u65E5\uFF1A").concat(last_update.textContent);
+              var text = _data.querySelector('text');
 
-            _this.ul_element.appendChild(li_element);
+              var last_update = _data.querySelector('lastmod');
+
+              li_element.innerHTML = "text\uFF1A".concat(text.textContent, "<br>\u6700\u7D42\u66F4\u65B0\u65E5\uFF1A").concat(last_update.textContent);
+
+              _this.ul_element.appendChild(li_element);
+            }
           }
         } catch (err) {
           _iterator.e(err);
@@ -10557,132 +10491,378 @@ var xmlGetData = /*#__PURE__*/function () {
 /*!*******************************************!*\
   !*** ./_dev/js/modules/youtubeAPIFunc.js ***!
   \*******************************************/
-/***/ (function() {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-// export class youtubeAPIFunc {
-//   /**
-//    * @param  {Element} elements rootとなる要素
-//    * @returns void
-//    */
-//   constructor(elements = {}) {
-//     const defaultOptions = {
-//       activeClass: 'is-active',
-//       CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
-//       CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
-//       CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
-//       CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
-//       APIKEY: 'AIzaSyDuKNkg0X_nwgg-9Yb2bH3JEDC2djGvNFc',
-//       ID: '',
-//       LIVESTATUS: '',
-//       statusFlg: false,
-//     };
-//     this.o = Object.assign(defaultOptions);
-//     this.elements = elements;
-//     this.liveElm = document.getElementById('live');
-//     this.init();
-//   }
-//   /**
-//    * 初期化処理
-//    *
-//    * @returns void
-//    */
-//   init() {
-//     window.addEventListener('load', this.onJSClientLoad.bind(this));
-//   }
-//   /**
-//    * ページロード時にスライドショーを再生する
-//    *
-//    * @returns void
-//    */
-//   /* APIロード */
-//   onJSClientLoad() {
-// const getYouTube = async (api, query, cooldown = 300) => {
-//   await new Promise((r) => setTimeout(r, cooldown));
-//   return await (
-//     await fetch(`https://www.googleapis.com/youtube/v3/${api}${Object.entries(query).reduce((p, [k, v]) => `${p}&${k}=${v}`, `?key=${this.o.APIKEY}`)}`)
-//   ).json();
-// };
-// const getVideos = async (channelId) => {
-//   const playlistId = (
-//     await getYouTube("channels", {
-//       part: "contentDetails",
-//       id: channelId,
-//     })
-//   ).items[0].contentDetails.relatedPlaylists.uploads;
-//   switch (channelId) {
-//     case this.o.CHANNEL_ID_01:
-//       break;
-//       case this.o.CHANNEL_ID_02:
-//         break;
-//       case this.o.CHANNEL_ID_03:
-//       break;
-//       case this.o.CHANNEL_ID_04:
-//       break;
-//   }
-//   return await getYouTube("playlistItems", {
-//     part: "snippet",
-//     maxResults: 50,
-//     playlistId,
-//   })
-// };
-// const liveStatusFunc = (resolveItem, i) => {
-//   return getYouTube("videos", {
-//     part: "snippet",
-//     id: resolveItem.items[i].snippet.resourceId.videoId,
-//   })
-// }
-// const liveFunc = (resolveItem, i) => {
-//   return getYouTube("videos", {
-//     part: "liveStreamingDetails",
-//     id: resolveItem.items[i].snippet.resourceId.videoId,
-//   })
-// }
-// const liveStatus = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
-//   // console.log(resolveItem.items[0])
-//   if (resolveItem.items[0].snippet) {
-//     if (resolveItem.items[0].snippet.liveBroadcastContent === 'none') {
-//       this.o.LIVESTATUS = '<span class="live-status">アーカイブ済み</span>';
-//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
-//       this.o.LIVESTATUS = `<span class="live-status--live">LIVE</span>`;
-//     } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
-//       this.o.LIVESTATUS = `<span class="live-status--upcoming">配信予定</span>`;
-//     }
-//     moviecontent.innerHTML = `<div class="items"><div class="items__img"><a href="https://www.youtube.com/watch?v=${resolveItem.items[0].id}"><img style="width:30%" src="${resolveItem.items[0].snippet.thumbnails.high.url}"></a></div>
-//     <div class="items__text">${resolveItem.items[0].snippet.title}</div>
-//     ${this.o.LIVESTATUS}
-//     </div>`;
-//   }
-// }
-// const liveDetailsFunc = (resolveItem, rootitems, i, moviecontent, detailcontent) => {
-//   detailcontent.innerHTML = `<div class="items"><p class="scheduled">${resolveItem.items[0].liveStreamingDetails.scheduledStartTime}</p></div>`
-//   // console.log("livestreaming："+resolveItem.items[0]);
-// };
-// const resolveFunc = (resolveItem) => {
-//   const root = document.createElement('ul');
-//   this.elements.appendChild(root);
-//   for (let i=0;i <15; i++) {
-//     const rootitems = document.createElement('li');
-//     const moviecontent = document.createElement('div');
-//     moviecontent.classList.add('movie-content');
-//     const detailcontent = document.createElement('div');
-//     detailcontent.classList.add('details-content');
-//     root.appendChild(rootitems);
-//     rootitems.appendChild(moviecontent);
-//     rootitems.appendChild(detailcontent);
-//     liveStatusFunc(resolveItem, i).then(r => liveStatus(r, rootitems, i, moviecontent, detailcontent));
-//     liveFunc(resolveItem, i).then(r => liveDetailsFunc(r, rootitems, i, moviecontent, detailcontent));
-//   }
-// }
-// // べー
-// getVideos(this.o.CHANNEL_ID_01).then(r => resolveFunc(r));
-// // ライラさん
-// getVideos(this.o.CHANNEL_ID_02).then(r => resolveFunc(r));
-// // なごみさん
-// getVideos(this.o.CHANNEL_ID_03).then(r => resolveFunc(r));
-// // ろろぬさん
-// getVideos(this.o.CHANNEL_ID_04).then(r => resolveFunc(r));
-//   }
-// }
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "youtubeAPIFunc": function() { return /* binding */ youtubeAPIFunc; }
+/* harmony export */ });
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var youtubeAPIFunc = /*#__PURE__*/function () {
+  /**
+   * @param  {Element} elements rootとなる要素
+   * @returns void
+   */
+  function youtubeAPIFunc(elements) {
+    var liveElements = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, youtubeAPIFunc);
+
+    var defaultOptions = {
+      activeClass: 'is-active',
+      CHANNEL_ID_01: 'UCPt71Qf78TNlGfnchQDBBwg',
+      CHANNEL_ID_02: 'UCqKexNL7YoueTlGSNZXoqPQ',
+      CHANNEL_ID_03: 'UC0GErsdTh7BijpLG7Qd-gpQ',
+      CHANNEL_ID_04: 'UCgunVdIAaXrmrpGTUlp5nOA',
+      CHANNEL_ID_05: 'UC1CiTzTMaRQUIPdSkvSt29g',
+      APIKEY: 'AIzaSyDpGvB-IA0WgEVBYrMdW-dl8zm4emzLYwE',
+      ID: '',
+      LIVESTATUS: '',
+      statusFlg: false
+    };
+    this.o = Object.assign(defaultOptions);
+    this.elements = elements;
+    this.liveElm = liveElements;
+    this.elmCount = 0;
+    this.liveRoot = document.createElement('ul'); //配信中ul
+
+    this.liveRoot.classList.add('temporary-element');
+    this.elements.appendChild(this.liveRoot);
+    this.reservationRoot = document.createElement('ul'); //予約ul
+
+    this.reservationRoot.classList.add('temporary-element');
+    this.liveElm.appendChild(this.reservationRoot);
+    this.init();
+  }
+  /**
+   * 初期化処理
+   *
+   * @returns void
+   */
+
+
+  _createClass(youtubeAPIFunc, [{
+    key: "init",
+    value: function init() {
+      window.addEventListener('load', this.onJSClientLoad.bind(this));
+    }
+    /**
+     * ページロード時にスライドショーを再生する
+     *
+     * @returns void
+     */
+
+    /* APIロード */
+
+  }, {
+    key: "onJSClientLoad",
+    value: function onJSClientLoad() {
+      var _this = this;
+
+      var getYouTube = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(api, query) {
+          var cooldown,
+              _args = arguments;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  cooldown = _args.length > 2 && _args[2] !== undefined ? _args[2] : 300;
+                  _context.next = 3;
+                  return new Promise(function (r) {
+                    return setTimeout(r, cooldown);
+                  });
+
+                case 3:
+                  _context.next = 5;
+                  return fetch("https://www.googleapis.com/youtube/v3/".concat(api).concat(Object.entries(query).reduce(function (p, _ref2) {
+                    var _ref3 = _slicedToArray(_ref2, 2),
+                        k = _ref3[0],
+                        v = _ref3[1];
+
+                    return "".concat(p, "&").concat(k, "=").concat(v);
+                  }, "?key=".concat(_this.o.APIKEY))));
+
+                case 5:
+                  _context.next = 7;
+                  return _context.sent.json();
+
+                case 7:
+                  return _context.abrupt("return", _context.sent);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function getYouTube(_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      var getVideos = /*#__PURE__*/function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(channelId) {
+          var playlistId;
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return getYouTube("channels", {
+                    part: "contentDetails",
+                    id: channelId
+                  });
+
+                case 2:
+                  playlistId = _context2.sent.items[0].contentDetails.relatedPlaylists.uploads;
+                  _context2.t0 = channelId;
+                  _context2.next = _context2.t0 === _this.o.CHANNEL_ID_01 ? 6 : _context2.t0 === _this.o.CHANNEL_ID_02 ? 7 : _context2.t0 === _this.o.CHANNEL_ID_03 ? 8 : _context2.t0 === _this.o.CHANNEL_ID_04 ? 9 : _context2.t0 === _this.o.CHANNEL_ID_05 ? 10 : 11;
+                  break;
+
+                case 6:
+                  return _context2.abrupt("break", 11);
+
+                case 7:
+                  return _context2.abrupt("break", 11);
+
+                case 8:
+                  return _context2.abrupt("break", 11);
+
+                case 9:
+                  return _context2.abrupt("break", 11);
+
+                case 10:
+                  return _context2.abrupt("break", 11);
+
+                case 11:
+                  _context2.next = 13;
+                  return getYouTube("playlistItems", {
+                    part: "snippet",
+                    maxResults: 5,
+                    playlistId: playlistId
+                  });
+
+                case 13:
+                  return _context2.abrupt("return", _context2.sent);
+
+                case 14:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function getVideos(_x3) {
+          return _ref4.apply(this, arguments);
+        };
+      }();
+
+      var liveStatusFunc = function liveStatusFunc(resolveItem, i) {
+        return getYouTube("videos", {
+          part: "snippet",
+          id: resolveItem.items[i].snippet.resourceId.videoId
+        });
+      };
+
+      var liveFunc = function liveFunc(resolveItem, i) {
+        return getYouTube("videos", {
+          part: "liveStreamingDetails",
+          id: resolveItem.items[i].snippet.resourceId.videoId
+        });
+      };
+
+      var liveStatus = function liveStatus(resolveItem, rootitems, i, detailcontent, livecontent, rootitemsLive) {
+        if (resolveItem.items[0].snippet) {
+          if (resolveItem.items[0].snippet.liveBroadcastContent === 'upcoming') {
+            _this.elmCount += 1;
+
+            _this.reservationRoot.appendChild(rootitems);
+
+            var movieRoot = document.createElement('div');
+            movieRoot.classList.add('movie-content');
+            rootitems.appendChild(movieRoot);
+            rootitems.appendChild(detailcontent);
+
+            if (_this.elmCount === 1) {
+              _this.reservationRoot.classList.add('movie-list');
+
+              _this.reservationRoot.classList.add('movie-list--col1');
+            } else if (_this.elmCount === 2) {
+              _this.reservationRoot.classList.add('movie-list');
+
+              _this.reservationRoot.classList.remove('movie-list--col1');
+
+              _this.reservationRoot.classList.add('movie-list--col2');
+            } else if (_this.elmCount === 3) {
+              _this.reservationRoot.classList.add('movie-list');
+
+              _this.reservationRoot.classList.remove('movie-list--col2');
+
+              _this.reservationRoot.classList.add('movie-list--col3');
+            } else if (_this.elmCount === 4) {
+              _this.reservationRoot.classList.add('movie-list');
+
+              _this.reservationRoot.classList.remove('movie-list--col3');
+
+              _this.reservationRoot.classList.add('movie-list--col4');
+            }
+
+            movieRoot.innerHTML = "<div class=\"movie-content__items-img\">\n          <a href=\"https://www.youtube.com/watch?v=".concat(resolveItem.items[0].id, "\">\n          <img src=\"").concat(resolveItem.items[0].snippet.thumbnails.maxres.url, "\">\n          </a>\n          </div>\n        <p class=\"movie-content__items-channel\">").concat(resolveItem.items[0].snippet.channelTitle, "</p>\n        <p class=\"movie-content__items-text\">").concat(resolveItem.items[0].snippet.title, "</p>");
+          } else if (resolveItem.items[0].snippet.liveBroadcastContent === 'live') {
+            _this.elmCount += 1;
+
+            _this.liveRoot.appendChild(rootitems);
+
+            var liveRoot = document.createElement('div');
+            livecontent.classList.add('movie-content__items');
+            rootitems.appendChild(liveRoot);
+            liveRoot.appendChild(detailcontent);
+
+            if (_this.elmCount === 1) {
+              _this.liveRoot.classList.add('movie-list');
+
+              _this.liveRoot.classList.add('movie-list--col1');
+            } else if (_this.elmCount === 2) {
+              _this.liveRoot.classList.add('movie-list');
+
+              _this.liveRoot.classList.remove('movie-list--col1');
+
+              _this.liveRoot.classList.add('movie-list--col2');
+            } else if (_this.elmCount === 3) {
+              _this.liveRoot.classList.add('movie-list');
+
+              _this.liveRoot.classList.remove('movie-list--col2');
+
+              _this.liveRoot.classList.add('movie-list--col3');
+            } else if (_this.elmCount === 4) {
+              _this.liveRoot.classList.add('movie-list');
+
+              _this.liveRoot.classList.remove('movie-list--col3');
+
+              _this.liveRoot.classList.add('movie-list--col4');
+            }
+
+            liveRoot.innerHTML = "<div class=\"live-content__items-img\"><a href=\"https://www.youtube.com/watch?v=".concat(resolveItem.items[0].id, "\"><img src=\"").concat(resolveItem.items[0].snippet.thumbnails.maxres.url, "\"></a></div>\n      <p class=\"live-content__items-channel\">").concat(resolveItem.items[0].snippet.channelTitle, "</p>\n      <p class=\"live-content__items-text\">").concat(resolveItem.items[0].snippet.title, "</p>");
+          } // console.log(root)
+
+        }
+      };
+
+      var liveDetailsFunc = function liveDetailsFunc(resolveItem, rootitems, i, detailcontent) {
+        var normalizeDateArry = resolveItem.items[0].liveStreamingDetails.scheduledStartTime.split('T');
+        var normalizeDate = normalizeDateArry[0].split('-').join('/');
+        var hour = Number(normalizeDateArry[1].split(':')[0]);
+        var minit = Number(normalizeDateArry[1].split(':')[1]);
+        var today = new Date();
+        var year = String(today.getFullYear());
+        var nowHour = String(today.getHours());
+        var nowMinit = String(today.getMinutes());
+        var month = today.getMonth() + 1;
+        var day = today.getDate();
+
+        if (today.getMonth() + 1 <= 10) {
+          month = String('0' + month);
+        } else {
+          month = String(month);
+        }
+
+        if (day <= 10) {
+          day = String('0' + day);
+        } else {
+          day = String(day);
+        }
+
+        var sum = year + month + day + nowHour + nowMinit;
+        Number(sum);
+        hour = hour + 9;
+        String(hour);
+
+        if (minit === 0) {
+          minit = '00';
+        }
+
+        String(minit);
+        var liveTime = String(normalizeDateArry[0].split('-').join('')) + hour + minit;
+
+        if (sum <= liveTime) {
+          detailcontent.innerHTML = "<span class=\"details-content__items-scheduled-date\">".concat(normalizeDate, "</span><span class=\"details-content__items-scheduled-time\">").concat(hour, ":").concat(minit, "</span>");
+        }
+      };
+
+      var resolveFunc = function resolveFunc(resolveItem) {
+        _this.elmCount = 0;
+
+        var _loop = function _loop(i) {
+          var rootitems = document.createElement('li');
+          var rootitemsLive = document.createElement('li');
+          var livecontent = document.createElement('div');
+          livecontent.classList.add('live-content');
+          var detailcontent = document.createElement('p');
+          detailcontent.classList.add('details-content');
+          liveFunc(resolveItem, i).then(function (r) {
+            return liveDetailsFunc(r, rootitems, i, detailcontent);
+          });
+          liveStatusFunc(resolveItem, i).then(function (r) {
+            return liveStatus(r, rootitems, i, detailcontent, rootitemsLive);
+          });
+        };
+
+        for (var i = 0; i < 10; i++) {
+          _loop(i);
+        }
+      }; // べー
+
+
+      getVideos(this.o.CHANNEL_ID_01).then(function (r) {
+        return resolveFunc(r);
+      }); // ライラさん
+
+      getVideos(this.o.CHANNEL_ID_02).then(function (r) {
+        return resolveFunc(r);
+      }); // なごみさん
+
+      getVideos(this.o.CHANNEL_ID_03).then(function (r) {
+        return resolveFunc(r);
+      }); // ろろぬさん
+
+      getVideos(this.o.CHANNEL_ID_04).then(function (r) {
+        return resolveFunc(r);
+      }); // ANSA公式
+
+      getVideos(this.o.CHANNEL_ID_05).then(function (r) {
+        return resolveFunc(r);
+      });
+    }
+  }]);
+
+  return youtubeAPIFunc;
+}();
 
 /***/ }),
 
@@ -24811,7 +24991,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_xmlGetData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/xmlGetData */ "./_dev/js/modules/xmlGetData.js");
 /* harmony import */ var _modules_mvAnimation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/mvAnimation */ "./_dev/js/modules/mvAnimation.js");
 /* harmony import */ var _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/youtubeAPIFunc */ "./_dev/js/modules/youtubeAPIFunc.js");
-/* harmony import */ var _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var scroll_behavior_polyfill__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! scroll-behavior-polyfill */ "./node_modules/scroll-behavior-polyfill/dist/index.js");
@@ -24930,8 +25109,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var _item5 = _step.value;
-      new _modules_SmoothScroll__WEBPACK_IMPORTED_MODULE_3__.SmoothScroll(_item5, urlHash);
+      var _item7 = _step.value;
+      new _modules_SmoothScroll__WEBPACK_IMPORTED_MODULE_3__.SmoothScroll(_item7, urlHash);
     } // PCheaderトグル
 
   } catch (err) {
@@ -25101,15 +25280,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   var tabRoots = doc.querySelectorAll('.js-tab-hook');
+  var tabRoots2 = doc.querySelectorAll('.js-tab-hook-02');
+  var displayTarget = null;
 
   if (tabRoots.length) {
+    displayTarget = 'js-tab-news-items';
+
     var _iterator3 = _createForOfIteratorHelper(tabRoots),
         _step3;
 
     try {
       for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
         var _item = _step3.value;
-        new _modules_tab__WEBPACK_IMPORTED_MODULE_4__.tab(_item, tabRoots);
+        new _modules_tab__WEBPACK_IMPORTED_MODULE_4__.tab(_item, tabRoots, displayTarget);
       }
     } catch (err) {
       _iterator3.e(err);
@@ -25118,21 +25301,39 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   }
 
-  var moreShowRoots = doc.querySelectorAll('.js-show-btn');
+  if (tabRoots2.length) {
+    displayTarget = 'js-tab-member-items';
 
-  if (moreShowRoots) {
-    var _iterator4 = _createForOfIteratorHelper(moreShowRoots),
+    var _iterator4 = _createForOfIteratorHelper(tabRoots2),
         _step4;
 
     try {
       for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
         var _item2 = _step4.value;
-        new _modules_moreShow__WEBPACK_IMPORTED_MODULE_5__.moreShow(_item2);
+        new _modules_tab__WEBPACK_IMPORTED_MODULE_4__.tab(_item2, tabRoots2, displayTarget);
       }
     } catch (err) {
       _iterator4.e(err);
     } finally {
       _iterator4.f();
+    }
+  }
+
+  var moreShowRoots = doc.querySelectorAll('.js-show-btn');
+
+  if (moreShowRoots) {
+    var _iterator5 = _createForOfIteratorHelper(moreShowRoots),
+        _step5;
+
+    try {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        var _item3 = _step5.value;
+        new _modules_moreShow__WEBPACK_IMPORTED_MODULE_5__.moreShow(_item3);
+      }
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
     }
   }
 
@@ -25197,7 +25398,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           loadingGauge.style.width = Math.floor(gaugeWidth / 100 * current) + '%';
           baseCounting += 1; // 全て読み込んだ時
 
-          if (baseCounting === images.length) {
+          if (baseCounting === images.length - 20) {
             setTimeout(function () {
               // ローディング画面全体の非表示
               loadingRoot.classList.add('is-load'); // ローディングの終了
@@ -25216,37 +25417,37 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var fadeRoots = doc.querySelectorAll('.js-fade-roots');
 
   if (fadeRoots) {
-    var _iterator5 = _createForOfIteratorHelper(fadeRoots),
-        _step5;
+    var _iterator6 = _createForOfIteratorHelper(fadeRoots),
+        _step6;
 
     try {
-      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-        var _item3 = _step5.value;
-        new _modules_fade__WEBPACK_IMPORTED_MODULE_2__.fade(_item3);
+      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        var _item4 = _step6.value;
+        new _modules_fade__WEBPACK_IMPORTED_MODULE_2__.fade(_item4);
       }
     } catch (err) {
-      _iterator5.e(err);
+      _iterator6.e(err);
     } finally {
-      _iterator5.f();
+      _iterator6.f();
     }
   }
 
   var toggleRoots = doc.querySelectorAll('.js-toggle-roots');
 
   if (toggleRoots.length) {
-    var _iterator6 = _createForOfIteratorHelper(toggleRoots),
-        _step6;
+    var _iterator7 = _createForOfIteratorHelper(toggleRoots),
+        _step7;
 
     try {
-      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-        var _item4 = _step6.value;
-        var togglejudge = _item4.dataset.toggleJudge;
-        new _modules_toggle__WEBPACK_IMPORTED_MODULE_7__.toggle(_item4, toggleRoots, togglejudge);
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var _item5 = _step7.value;
+        var togglejudge = _item5.dataset.toggleJudge;
+        new _modules_toggle__WEBPACK_IMPORTED_MODULE_7__.toggle(_item5, toggleRoots, togglejudge);
       }
     } catch (err) {
-      _iterator6.e(err);
+      _iterator7.e(err);
     } finally {
-      _iterator6.f();
+      _iterator7.f();
     }
   }
 
@@ -25272,10 +25473,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     new _modules_jsonGetData__WEBPACK_IMPORTED_MODULE_8__.jsonGetData(jsonRoots);
   }
 
-  var xmlRoots = doc.getElementById('xml-area');
+  var xmlRoots = doc.querySelectorAll('.js-data-content');
 
-  if (xmlRoots) {
-    new _modules_xmlGetData__WEBPACK_IMPORTED_MODULE_9__.xmlGetData(xmlRoots);
+  if (xmlRoots.length) {
+    var num = 0;
+
+    var _iterator8 = _createForOfIteratorHelper(xmlRoots),
+        _step8;
+
+    try {
+      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+        var _item6 = _step8.value;
+        num += 1;
+        new _modules_xmlGetData__WEBPACK_IMPORTED_MODULE_9__.xmlGetData(_item6, num);
+      }
+    } catch (err) {
+      _iterator8.e(err);
+    } finally {
+      _iterator8.f();
+    }
   } // アンカーリンク
 
 
@@ -25283,11 +25499,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   if (animationRoot) {
     new _modules_mvAnimation__WEBPACK_IMPORTED_MODULE_10__.mvAnimation(animationRoot);
-  } // const youtubeAPIRoot = doc.getElementById('js-youtube-root');
-  // if (youtubeAPIRoot) {
-  //   new youtubeAPIFunc(youtubeAPIRoot);
-  // }
+  }
 
+  var youtubeAPIRoot = doc.getElementById('js-youtube-root');
+  var youtubeAPIRootLive = doc.getElementById('live');
+
+  if (youtubeAPIRoot) {
+    new _modules_youtubeAPIFunc__WEBPACK_IMPORTED_MODULE_11__.youtubeAPIFunc(youtubeAPIRoot, youtubeAPIRootLive);
+  }
 })(window, document);
 }();
 /******/ })()

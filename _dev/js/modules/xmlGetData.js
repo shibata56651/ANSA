@@ -3,7 +3,7 @@ export class xmlGetData {
    * @param  {Element} elements rootとなる要素
    * @returns void
    */
-  constructor(elements = {}) {
+  constructor(elements, num = {}) {
     const defaultOptions = {
       activeClass: 'is-active',
       changeClass: 'is-changing',
@@ -13,7 +13,7 @@ export class xmlGetData {
 
     this.o = Object.assign(defaultOptions);
     this.elements = elements;
-    this.carouselBtn = document.querySelector('.js-carousel-mv-btn');
+    this.count = num;
     this.timer;
     this.init();
   }
@@ -45,12 +45,16 @@ export class xmlGetData {
       this.ul_element = document.createElement('ul');
 
         for(let data of this.items) {
-          const li_element = document.createElement('li');
-          const url = data.querySelector('loc');
-          const last_update = data.querySelector('lastmod');
+          const id = data.querySelector('id');
 
-          li_element.innerHTML = `URL：${url.textContent}<br>最終更新日：${last_update.textContent}`;
-          this.ul_element.appendChild(li_element);
+          if (this.count === Number(id.textContent)) {
+            const li_element = document.createElement('li');
+            const text = data.querySelector('text');
+            const last_update = data.querySelector('lastmod');
+
+            li_element.innerHTML = `text：${text.textContent}<br>最終更新日：${last_update.textContent}`;
+            this.ul_element.appendChild(li_element);
+          }
       }
 
       this.elements.appendChild(this.ul_element);

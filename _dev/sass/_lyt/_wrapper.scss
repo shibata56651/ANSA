@@ -1,4 +1,4 @@
-@use '../_common/'as *;
+@use "../_common/"as *;
 
 .str-contents-wrapper {
   > .spot-light {
@@ -9,10 +9,11 @@
     display: block;
     width: 100%;
     height: 100vh;
-    background: $blue-color-01;
+    background: url("../../docs/common/images/img-bg-01.jpg");
 
     &::before {
       @include pseudo;
+
       top: -5%;
       left: 4%;
       width: 460px;
@@ -27,6 +28,7 @@
 
     &::after {
       @include pseudo;
+
       top: -5%;
       right: 4%;
       width: 460px;
@@ -38,6 +40,80 @@
       opacity: .3;
       animation: spotlightAnimation 3s .3s linear infinite alternate-reverse;
     }
+
+    >.chemical-light {
+      &:first-of-type {
+        &::before {
+          @include pseudo;
+
+          top: 70%;
+          left: 20%;
+          width: 10px;
+          height: 80px;
+          background-color: $Character-color-01;
+          opacity: .4;
+          border-radius: 8px;
+          transform: translate(0, 100%);
+          transform-origin: center bottom;
+          animation: spotlightAnimation 1s linear infinite alternate;
+          z-index: -1;
+          filter: blur(2px);
+        }
+
+        &::after {
+          @include pseudo;
+
+          top: 60%;
+          left: 80%;
+          width: 8px;
+          height: 60px;
+          background-color: $Character-color-02;
+          opacity: .4;
+          border-radius: 8px;
+          transform: translate(0, 100%);
+          transform-origin: center bottom;
+          animation: spotlightAnimation 1s .4s linear infinite alternate;
+          z-index: -1;
+          filter: blur(2px);
+        }
+      }
+
+      &:nth-of-type(2) {
+        &::before {
+          @include pseudo;
+
+          top: 70%;
+          left: 50%;
+          width: 10px;
+          height: 80px;
+          background-color: $Character-color-03;
+          opacity: .4;
+          border-radius: 8px;
+          transform: translate(0, 100%);
+          transform-origin: center bottom;
+          animation: spotlightAnimation 1.3s linear infinite alternate;
+          z-index: -1;
+          filter: blur(2px);
+        }
+
+        &::after {
+          @include pseudo;
+
+          top: 60%;
+          left: 40%;
+          width: 7px;
+          height: 50px;
+          background-color: $Character-color-04;
+          opacity: .4;
+          border-radius: 8px;
+          transform: translate(0, 100%);
+          transform-origin: center bottom;
+          animation: spotlightAnimation 1s .6s linear infinite alternate;
+          z-index: -1;
+          filter: blur(2px);
+        }
+      }
+    }
   }
 
   &__inner {
@@ -48,7 +124,7 @@
     }
 
     @include rwd(bpTab) {
-      margin: 120px 10px;
+      margin: 120px 25px;
     }
 
     @include rwd(bpTab, below) {
@@ -68,6 +144,7 @@
     display: flex;
     align-items: center;
 
+    /* stylelint-disable-next-line selector-class-pattern */
     .str-contents-wrapper--teaser & {
       >img {
         width: 100%;
@@ -94,6 +171,38 @@
     &--text {
       color: $black-color-01;
       font-size: .8rem;
+    }
+  }
+
+  @include rwd(bpSp, below) {
+    &__items {
+      &-a,
+      &-b,
+      &-c,
+      &-d {
+        position: absolute;
+        width: clamp(180px, 47vw, 270px);
+      }
+
+      &-a {
+        top: 22%;
+        left: 2%;
+      }
+
+      &-b {
+        top: 40%;
+        left: 12%;
+      }
+
+      &-c {
+        top: 22%;
+        right: 2%;
+      }
+
+      &-d {
+        top: 40%;
+        right: 12%;
+      }
     }
   }
 }
@@ -127,6 +236,7 @@
 
   &::before {
     @include pseudo;
+
     top: 0;
     left: 0;
     width: 100%;
@@ -145,20 +255,22 @@
 
     &::before {
       @include pseudo;
+
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba($color: $black-color-03, $alpha: .4);
+      background: rgba($color: $black-color-03, $alpha: 40%);
     }
 
     &::after {
       @include pseudo;
+
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba($color: $black-color-03, $alpha: .4);
+      background: rgba($color: $black-color-03, $alpha: 40%);
     }
   }
 
@@ -169,5 +281,121 @@
     &--logo {
       margin-top: -10px;
     }
+  }
+
+  @include rwd(bpSp, below) {
+    &__items {
+      /* stylelint-disable-next-line selector-class-pattern */
+      &:not(.loading__items--logo) {
+        display: none;
+      }
+    }
+  }
+}
+
+.movie-content {
+  &__items {
+    &-img {
+      display: inline-block;
+      width: 100%;
+
+      >a {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    &-channel {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    &-text {
+      margin-top: 10px;
+    }
+  }
+
+  @include rwd(bpSp) {
+    &__items {
+      max-width: 480px;
+    }
+  }
+
+  @include rwd(bpSp, below) {
+    >img {
+      height: 268px;
+    }
+  }
+}
+
+.details-content {
+  margin-top: 10px;
+
+  &__items {
+    &-scheduled-time {
+      margin-left: 15px;
+    }
+  }
+}
+
+.movie-list {
+  @include rwd(bpSp) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px 20px;
+    margin-top: 40px;
+
+    >li {
+      width: 100%;
+    }
+
+    &--col1 {
+      >li {
+        max-width: calc((100% / 3) - 20px);
+      }
+    }
+
+    &--col2 {
+      >li {
+        max-width: calc((100% / 3) - 20px);
+      }
+    }
+
+    &--col3 {
+      >li {
+        max-width: calc((100% / 3) - 20px);
+      }
+    }
+
+    &--col4 {
+      >li {
+        max-width: calc((100% / 4) - 20px);
+      }
+    }
+  }
+
+  @include rwd(bpSp, below) {
+    margin-top: 20px;
+
+    >li {
+      margin-top: 20px;
+    }
+  }
+}
+
+.mail {
+  &__root {
+    margin-top: 78px;
+  }
+
+  &__btn {
+    color: $white-color-01;
+  }
+}
+
+.form {
+  &__item {
+    margin-top: 28px;
   }
 }

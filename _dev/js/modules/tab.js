@@ -3,25 +3,21 @@ export class tab {
    * @param  {Element} element rootとなる要素
    * @returns void
    */
-  constructor(element, roots = {}) {
+  constructor(element, roots, displayTarget = {}) {
     const defaultOptions = {
       activeClass: 'is-active',
-      tabItem: 'js-tab-item',
+      tabItem: displayTarget,
     };
 
     this.o = Object.assign(defaultOptions);
     this.element = element;
     this.roots = roots;
     this.tabItem = null;
-    this.displayItem = document.querySelectorAll(`.${this.o.tabItem}`);
+    this.displayItem = null;
     this.content = document.getElementById(this.element.hash.substring(1));
     this.activeClass = this.o.activeClass;
 
     this.init();
-
-    window.addEventListener('load', () => {
-      this.loadHandler();
-    });
   }
 
   /**
@@ -40,6 +36,12 @@ export class tab {
   clickHandler(e) {
     e.preventDefault();
 
+    if(this.element.classList.contains('js-tab-hook-02')) {
+      this.displayItem = document.querySelectorAll(`.js-tab-news-items`);
+    } else if(this.element.classList.contains('js-tab-hook')) {
+      this.displayItem = document.querySelectorAll(`.js-tab-member-items`);
+    }
+
     for (const item of this.roots) {
       item.parentNode.classList.remove(this.activeClass);
     }
@@ -54,32 +56,4 @@ export class tab {
     this.element.parentNode.classList.add(this.activeClass);
     this.content.classList.add(this.activeClass);
     }
-
-  loadHandler() {
-    const param = location.search.substring(1);
-    const hooks = document.querySelectorAll('.js-tab-hook');
-    const hookItems = document.querySelectorAll('.js-tab-item');
-
-    if (param.indexOf('tab') === 0) {
-      for (const item of this.roots) {
-        item.parentNode.classList.remove(this.activeClass);
-      }
-
-      for (const item of this.displayItem) {
-        item.classList.remove(this.activeClass);
-      }
-    }
-
-    for (const hook of hooks) {
-      if (hook.getAttribute('href') === `#${param}`) {
-        hook.parentNode.classList.add(this.activeClass);
-      }
-    }
-
-    for (const hookItem of hookItems) {
-      if (hookItem.getAttribute('id') === `${param}`) {
-        hookItem.classList.add(this.activeClass);
-      }
-    }
-  }
 }

@@ -1,7 +1,7 @@
 @use '../../_common/'as *;
 
 /* モーダルjsのスタイル */
-.js-modal-content {
+.js-modal-content__  {
   [data-script-enabled="true"] & {
     display: none;
     opacity: 0;
